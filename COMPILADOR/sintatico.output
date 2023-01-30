@@ -1,3 +1,48 @@
+Nonterminals useless in grammar
+
+    rotinas
+    lista_rotinas
+    rotina
+    funcao
+    procedimento
+    lista_parametros
+    parametro
+    mecanismo
+
+
+Terminals unused in grammar
+
+    T_FUNC
+    T_FIMFUNC
+    T_PROC
+    T_FIMPROC
+    T_REF
+
+
+Rules useless in grammar
+
+   47 rotinas: %empty
+   48        | lista_rotinas
+
+   49 lista_rotinas: lista_rotinas rotina
+   50              | rotina
+
+   51 rotina: funcao
+   52       | procedimento
+
+   53 funcao: T_FUNC tipo T_IDENTIFICADOR T_ABRE lista_parametros T_FECHA variaveis T_INICIO lista_comandos T_FIMFUNC
+
+   54 procedimento: T_PROC T_IDENTIFICADOR T_ABRE lista_parametros T_FECHA variaveis T_INICIO lista_comandos T_FIMPROC
+
+   55 lista_parametros: %empty
+   56                 | parametro lista_parametros
+
+   57 parametro: tipo T_IDENTIFICADOR
+
+   58 mecanismo: %empty
+   59          | T_REF
+
+
 Grammar
 
     0 $accept: programa $end
@@ -107,79 +152,84 @@ Terminals, with rules where they appear
     T_F (286) 44
     T_IDENTIFICADOR (287) 4 11 12 21 30 41
     T_NUMERO (288) 42
+    T_FUNC (289)
+    T_FIMFUNC (290)
+    T_PROC (291)
+    T_FIMPROC (292)
+    T_REF (293)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (34)
+    $accept (39)
         on left: 0
-    programa (35)
+    programa (40)
         on left: 3
         on right: 0
-    $@1 (36)
+    $@1 (41)
         on left: 1
         on right: 3
-    $@2 (37)
+    $@2 (42)
         on left: 2
         on right: 3
-    cabecalho (38)
+    cabecalho (43)
         on left: 4
         on right: 3
-    variaveis (39)
+    variaveis (44)
         on left: 5 6
         on right: 3
-    declaracao_variaveis (40)
+    declaracao_variaveis (45)
         on left: 7 8
         on right: 6 7
-    tipo (41)
+    tipo (46)
         on left: 9 10
         on right: 7 8
-    lista_variaveis (42)
+    lista_variaveis (47)
         on left: 11 12
         on right: 7 8 11
-    lista_comandos (43)
+    lista_comandos (48)
         on left: 13 14
         on right: 3 14 25 28
-    comando (44)
+    comando (49)
         on left: 15 16 17 18
         on right: 14
-    entrada_saida (45)
+    entrada_saida (50)
         on left: 19 20
         on right: 15
-    leitura (46)
+    leitura (51)
         on left: 21
         on right: 19
-    escrita (47)
+    escrita (52)
         on left: 22
         on right: 20
-    repeticao (48)
+    repeticao (53)
         on left: 25
         on right: 16
-    $@3 (49)
+    $@3 (54)
         on left: 23
         on right: 25
-    $@4 (50)
+    $@4 (55)
         on left: 24
         on right: 25
-    selecao (51)
+    selecao (56)
         on left: 28
         on right: 17
-    $@5 (52)
+    $@5 (57)
         on left: 26
         on right: 28
-    $@6 (53)
+    $@6 (58)
         on left: 27
         on right: 28
-    atribuicao (54)
+    atribuicao (59)
         on left: 30
         on right: 18
-    $@7 (55)
+    $@7 (60)
         on left: 29
         on right: 30
-    expressao (56)
+    expressao (61)
         on left: 31 32 33 34 35 36 37 38 39 40
         on right: 22 25 28 30 31 32 33 34 35 36 37 38 39 46
-    termo (57)
+    termo (62)
         on left: 41 42 43 44 45 46
         on right: 40 45
 

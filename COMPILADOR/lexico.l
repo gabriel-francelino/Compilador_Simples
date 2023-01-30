@@ -28,6 +28,12 @@ fimenquanto                 return T_FIMENQUANTO;
 inteiro                     return T_INTEIRO;
 logico                      return T_LOGICO;
 
+func                        return T_FUNC;
+fimfunc                     return T_FIMFUNC;
+proc                        return T_PROC;
+fimproc                     return T_FIMPROC;
+
+
 "+"                         return T_MAIS;
 "-"                         return T_MENOS;
 "*"                         return T_VEZES;
