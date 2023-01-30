@@ -538,11 +538,11 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    58,    58,    60,    57,    76,    81,    82,    86,    87,
-      91,    93,    98,   106,   117,   118,   122,   123,   124,   125,
-     129,   130,   134,   142,   151,   156,   150,   174,   182,   173,
-     197,   196,   212,   218,   223,   228,   233,   238,   243,   248,
-     253,   258,   262,   268,   273,   278,   283,   290
+       0,    58,    58,    60,    57,    77,    82,    83,    87,    88,
+      92,    94,    99,   107,   118,   119,   123,   124,   125,   126,
+     130,   131,   135,   143,   152,   157,   151,   175,   183,   174,
+     198,   197,   213,   219,   224,   229,   234,   239,   244,   249,
+     254,   259,   263,   269,   274,   279,   284,   291
 };
 #endif
 
@@ -1408,7 +1408,7 @@ yyreduce:
     break;
 
   case 4:
-#line 67 "sintatico.y"
+#line 68 "sintatico.y"
         { 
             int conta = desempilha();
             if (conta)
@@ -1419,25 +1419,25 @@ yyreduce:
     break;
 
   case 5:
-#line 77 "sintatico.y"
+#line 78 "sintatico.y"
         { fprintf(yyout,"\tINPP\n"); }
 #line 1425 "sintatico.c"
     break;
 
   case 10:
-#line 92 "sintatico.y"
+#line 93 "sintatico.y"
         { tipo = LOG;}
 #line 1431 "sintatico.c"
     break;
 
   case 11:
-#line 94 "sintatico.y"
+#line 95 "sintatico.y"
         { tipo = INT;}
 #line 1437 "sintatico.c"
     break;
 
   case 12:
-#line 99 "sintatico.y"
+#line 100 "sintatico.y"
         {  
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
@@ -1449,7 +1449,7 @@ yyreduce:
     break;
 
   case 13:
-#line 107 "sintatico.y"
+#line 108 "sintatico.y"
         { 
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
@@ -1461,7 +1461,7 @@ yyreduce:
     break;
 
   case 22:
-#line 135 "sintatico.y"
+#line 136 "sintatico.y"
         { 
             int pos = buscaSimbolo(atomo);         
             fprintf(yyout,"\tLEIA\n\tARZG\t%d\n", tabSimb[pos].end); 
@@ -1470,7 +1470,7 @@ yyreduce:
     break;
 
   case 23:
-#line 143 "sintatico.y"
+#line 144 "sintatico.y"
         { 
             desempilha();
             fprintf(yyout,"\tESCR\n"); 
@@ -1479,7 +1479,7 @@ yyreduce:
     break;
 
   case 24:
-#line 151 "sintatico.y"
+#line 152 "sintatico.y"
         { 
             fprintf(yyout,"L%d\tNADA\n", ++rotulo);     // L de label 
             empilhar(rotulo);
@@ -1488,7 +1488,7 @@ yyreduce:
     break;
 
   case 25:
-#line 156 "sintatico.y"
+#line 157 "sintatico.y"
         { 
             int tip = desempilha();
             if(tip != LOG )
@@ -1500,7 +1500,7 @@ yyreduce:
     break;
 
   case 26:
-#line 165 "sintatico.y"
+#line 166 "sintatico.y"
         { 
             int rot1 = desempilha();
             int rot2 = desempilha();
@@ -1510,7 +1510,7 @@ yyreduce:
     break;
 
   case 27:
-#line 174 "sintatico.y"
+#line 175 "sintatico.y"
         { 
             int tip = desempilha();
             if(tip != LOG )
@@ -1522,7 +1522,7 @@ yyreduce:
     break;
 
   case 28:
-#line 182 "sintatico.y"
+#line 183 "sintatico.y"
         { 
             int rot = desempilha();
             fprintf(yyout,"\tDSVS\tL%d\n", ++rotulo); 
@@ -1533,7 +1533,7 @@ yyreduce:
     break;
 
   case 29:
-#line 189 "sintatico.y"
+#line 190 "sintatico.y"
         { 
             int rot = desempilha();
             fprintf(yyout,"L%d\tNADA\n", rot); 
@@ -1542,7 +1542,7 @@ yyreduce:
     break;
 
   case 30:
-#line 197 "sintatico.y"
+#line 198 "sintatico.y"
         {
             int pos = buscaSimbolo(atomo);
             empilhar(pos);
@@ -1551,7 +1551,7 @@ yyreduce:
     break;
 
   case 31:
-#line 202 "sintatico.y"
+#line 203 "sintatico.y"
         { 
             int tip = desempilha();
             int pos = desempilha();
@@ -1563,7 +1563,7 @@ yyreduce:
     break;
 
   case 32:
-#line 213 "sintatico.y"
+#line 214 "sintatico.y"
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tMULT\n"); 
@@ -1573,7 +1573,7 @@ yyreduce:
     break;
 
   case 33:
-#line 219 "sintatico.y"
+#line 220 "sintatico.y"
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tDIVI\n"); 
@@ -1582,7 +1582,7 @@ yyreduce:
     break;
 
   case 34:
-#line 224 "sintatico.y"
+#line 225 "sintatico.y"
         {
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tSOMA\n"); 
@@ -1591,7 +1591,7 @@ yyreduce:
     break;
 
   case 35:
-#line 229 "sintatico.y"
+#line 230 "sintatico.y"
         {
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tSUBT\n"); 
@@ -1600,7 +1600,7 @@ yyreduce:
     break;
 
   case 36:
-#line 234 "sintatico.y"
+#line 235 "sintatico.y"
         {
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMMA\n"); 
@@ -1609,7 +1609,7 @@ yyreduce:
     break;
 
   case 37:
-#line 239 "sintatico.y"
+#line 240 "sintatico.y"
         {
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMME\n"); 
@@ -1618,7 +1618,7 @@ yyreduce:
     break;
 
   case 38:
-#line 244 "sintatico.y"
+#line 245 "sintatico.y"
         {
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMIG\n"); 
@@ -1627,7 +1627,7 @@ yyreduce:
     break;
 
   case 39:
-#line 249 "sintatico.y"
+#line 250 "sintatico.y"
         {
             testaTipo(LOG, LOG, LOG);
             fprintf(yyout,"\tCONJ\n"); 
@@ -1636,7 +1636,7 @@ yyreduce:
     break;
 
   case 40:
-#line 254 "sintatico.y"
+#line 255 "sintatico.y"
         {
             testaTipo(LOG, LOG, LOG);
             fprintf(yyout,"\tDISJ\n"); 
@@ -1645,7 +1645,7 @@ yyreduce:
     break;
 
   case 42:
-#line 263 "sintatico.y"
+#line 264 "sintatico.y"
         {
             int pos = buscaSimbolo(atomo);
             fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
@@ -1655,7 +1655,7 @@ yyreduce:
     break;
 
   case 43:
-#line 269 "sintatico.y"
+#line 270 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t%s\n", atomo);
             empilhar(INT);
@@ -1664,7 +1664,7 @@ yyreduce:
     break;
 
   case 44:
-#line 274 "sintatico.y"
+#line 275 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t1\n"); 
             empilhar(LOG);
@@ -1673,7 +1673,7 @@ yyreduce:
     break;
 
   case 45:
-#line 279 "sintatico.y"
+#line 280 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t0\n");
             empilhar(LOG);
@@ -1682,7 +1682,7 @@ yyreduce:
     break;
 
   case 46:
-#line 284 "sintatico.y"
+#line 285 "sintatico.y"
         { 
             int t = desempilha();
             if(t != LOG ) yyerror ("Incompatibilidade de tipo!");
@@ -1925,7 +1925,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 293 "sintatico.y"
+#line 294 "sintatico.y"
 
 
 int main (int argc, char *argv[]) {
