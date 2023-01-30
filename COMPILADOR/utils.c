@@ -11,6 +11,11 @@ struct elemTabSimbolos {
     char id[100];   //identificador
     int end;    // endereço
     int tip;    // tipo variável
+    char esc[1];
+    char dsl[1];
+    char rot[3];
+    char cat[3];
+    char *par[50];
 } tabSimb[TAM_TAB], elemTab;
 
 int posTab = 0;
@@ -61,7 +66,18 @@ void mostraTabela() {
     printf("\n");
 }
 
-
+/*  TABELA DE SIMBOLOS COMPLETA
+void mostra_tabela() {
+    int i;
+    printf("Tabela de símbolos");
+    printf("\n%3c | %30s | %s | %s | %s | %s\n",'#', "ID", "END", "tipo", "cat", "tam");
+    for (i = 0; i < 60; i++)
+        printf("-");
+    for (i = 0; i < posTab; i++)
+        printf("\n%3d | %30s | %3d | %4c | %3s | %d", i, TabSimb[i].id, TabSimb[i].endereco, TabSimb[i].tipo, TabSimb[i].cat, TabSimb[i].tam);
+    puts("\n");
+}
+*/
 
 // void testaAritmetico() {
 //     int t1 = desempilha();
