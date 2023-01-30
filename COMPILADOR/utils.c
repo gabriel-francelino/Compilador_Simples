@@ -1,9 +1,11 @@
 // Estrutura da Tabela de Simbolos
 #include <ctype.h>
-
 #define TAM_TAB 100
-
-enum {INT, LOG};
+enum 
+{
+    INT, 
+    LOG
+};
 
 struct elemTabSimbolos {
     char id[100];   //identificador
@@ -18,7 +20,6 @@ void maiuscula (char *s) {
         s[i] = toupper(s[i]);
     
 }
-
 
 int buscaSimbolo (char *id) {
     int i;
@@ -52,17 +53,42 @@ void insereSimbolo (struct elemTabSimbolos elem) {
 void mostraTabela() {
     puts("Tabela de Simbolos");
     puts("------------------");
-    printf("%30s | %s | %s\n", "ID", "END", "TIP");
+    printf("%30s | %s | %s \n", "ID", "END", "TIP");
     for (int i = 0; i < 50; i++)
         printf("-");
     for (int i = 0; i < posTab; i++)
         printf("\n%30s | %3d | %s", tabSimb[i].id, tabSimb[i].end, tabSimb[i].tip == INT? "INT" : "LOG");
     printf("\n");
-    
 }
 
+
+
+// void testaAritmetico() {
+//     int t1 = desempilha();
+//     int t2 = desempilha();
+//     if (t1 != INT || t2 != INT)
+//         yyerror("Incompatibilidade de tipo!");
+//     empilhar(INT);
+// }
+
+// void testaRelacional() {
+//     int t1 = desempilha();
+//     int t2 = desempilha();
+//     if (t1 != INT || t2 != INT)
+//         yyerror("Incompatibilidade de tipo!");
+//     empilhar(LOG);
+// }
+
+// void testaLogico() {
+//     int t1 = desempilha();
+//     int t2 = desempilha();
+//     if (t1 != LOG || t2 != LOG)
+//         yyerror("Incompatibilidade de tipo!");
+//     empilhar(LOG);
+// }
+
 // Estrutura da Pilha Semântica
-// usada para endereços, viaráveis, rótulos
+// usada para endereços, variáveis, rótulos
 
 #define TAM_PIL 100
 int pilha[TAM_PIL];
@@ -80,37 +106,10 @@ int desempilha() {
     return pilha[topo--];
 }
 
-
-/* OUTRAS OPÇOES DE TESTE DE TIPOS
-void testaAritmetico(){
+void testaTipo(int tipo1, int tipo2, int ret) {
     int t1 = desempilha();
     int t2 = desempilha();
-    if(t1 != INT || t2 != INT)
-        yyerror("Incompatibilidade de tipo!");
-    empilhar(INT);
-}
-
-void testaRelacional(){
-    int t1 = desempilha();
-    int t2 = desempilha();
-    if(t1 != INT || t2 != INT)
-        yyerror("Incompatibilidade de tipo!");
-    empilhar(LOG);
-}
-
-void testaLogico(){
-    int t1 = desempilha();
-    int t2 = desempilha();
-    if(t1 != LOG || t2 != LOG)
-        yyerror("Incompatibilidade de tipo!");
-    empilhar(LOG);
-}
-*/
-//---------------------------------------------
-void testaTipo(int tipo1, int tipo2, int ret){
-    int t1 = desempilha();
-    int t2 = desempilha();
-    if(t1 != tipo1 || t2 != tipo2)
+    if (t1 != tipo1 || t2 != tipo2)
         yyerror("Incompatibilidade de tipo!");
     empilhar(ret);
 }

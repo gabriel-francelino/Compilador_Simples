@@ -8,7 +8,6 @@
 int contaVar;       // conta o número de variáveis
 int rotulo = 0;     // marcar lugares no código
 int tipo;
-
 %}
 
 %token T_PROGRAMA
@@ -63,7 +62,6 @@ programa
             if (contaVar) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVar); 
         }
-        //ADICIONAR ROTINA AQUI*/
     T_INICIO lista_comandos T_FIM
         { 
             int conta = desempilha();
@@ -88,11 +86,12 @@ declaracao_variaveis
     | tipo lista_variaveis
     ;
 
-tipo 
+//REGRA "tipo"
+tipo        
     : T_LOGICO
-        { tipo = LOG;}
+        { tipo = LOG; }     // Variável "tipo"
     | T_INTEIRO
-        { tipo = INT;}
+        { tipo = INT; }
     ;
 
 lista_variaveis
@@ -156,8 +155,8 @@ repeticao
     expressao T_FACA 
         { 
             int tip = desempilha();
-            if(tip != LOG )
-                yyerror("Incompatibilidade de tipo!");
+            if (tip != LOG)
+                yyerror ("Incompatibilidade de tipo");
             fprintf(yyout,"\tDSVF\tL%d\n", ++rotulo); 
             empilhar(rotulo);
         }
@@ -166,7 +165,8 @@ repeticao
         { 
             int rot1 = desempilha();
             int rot2 = desempilha();
-            fprintf(yyout,"\tDSVS\tL%d\nL%d\tNADA\n", rot2, rot1); 
+            fprintf(yyout,"\tDSVS\tL%d\n", rot2); 
+            fprintf(yyout,"L%d\tNADA\n", rot1); 
         }
     ;
 
@@ -174,7 +174,7 @@ selecao
     : T_SE expressao T_ENTAO 
         { 
             int tip = desempilha();
-            if(tip != LOG )
+            if (tip != LOG)
                 yyerror("Incompatibilidade de tipo!");
             fprintf(yyout,"\tDSVF\tL%d\n", ++rotulo); 
             empilhar(rotulo);
@@ -203,7 +203,7 @@ atribuicao
         { 
             int tip = desempilha();
             int pos = desempilha();
-            if(tabSimb[pos].tip != tip)
+            if (tabSimb[pos].tip != tip)
                 yyerror("Incompatibilidade de tipo!");
             fprintf(yyout,"\tARZG\t%d\n", tabSimb[pos].end); 
         }
@@ -214,7 +214,6 @@ expressao
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tMULT\n"); 
-
         }
     | expressao T_DIV expressao
         { 
@@ -222,37 +221,37 @@ expressao
             fprintf(yyout,"\tDIVI\n"); 
         }
     | expressao T_MAIS expressao
-        {
+        { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tSOMA\n"); 
         }
     | expressao T_MENOS expressao
-        {
+        { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tSUBT\n"); 
         }
     | expressao T_MAIOR expressao
-        {
+        { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMMA\n"); 
         }
     | expressao T_MENOR expressao
-        {
+        { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMME\n"); 
         }
     | expressao T_IGUAL expressao
-        {
+        { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMIG\n"); 
         }
     | expressao T_E expressao
-        {
+        { 
             testaTipo(LOG, LOG, LOG);
             fprintf(yyout,"\tCONJ\n"); 
         }
     | expressao T_OU expressao
-        {
+        { 
             testaTipo(LOG, LOG, LOG);
             fprintf(yyout,"\tDISJ\n"); 
         }
@@ -265,12 +264,13 @@ termo
             int pos = buscaSimbolo(atomo);
             fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
             empilhar(tabSimb[pos].tip);
+            
         }
     | T_NUMERO
         { 
-            fprintf(yyout,"\tCRCT\t%s\n", atomo);
+            fprintf(yyout,"\tCRCT\t%s\n", atomo); 
             empilhar(INT);
-         }
+        }
     | T_V
         { 
             fprintf(yyout,"\tCRCT\t1\n"); 
@@ -278,13 +278,13 @@ termo
         }
     | T_F
         { 
-            fprintf(yyout,"\tCRCT\t0\n");
+            fprintf(yyout,"\tCRCT\t0\n"); 
             empilhar(LOG);
-         }
+        }
     | T_NAO termo
         { 
             int t = desempilha();
-            if(t != LOG ) yyerror ("Incompatibilidade de tipo!");
+            if (t != LOG) yyerror ("Incompatibilidade de tipo!");       // Verificação se o termo é lógico
             fprintf(yyout,"\tNEGA\n"); 
             empilhar(LOG);
         }
@@ -294,14 +294,14 @@ termo
 %%
 
 int main (int argc, char *argv[]) {
-    char *p, nameIn[100], nameOut[100]; // duas variáveis para guardar os nomes de saida e entrada
+    char *p, nameIn[100], nameOut[100]; // Duas variáveis para guardar os nomes de saida e entrada
     argv++;
     if (argc < 2) {
         puts("\n Compilador Simples");
         puts("\n\tUso:./simples <NOME>[.simples]\n\n");
         exit(10);
     }
-    p = strstr(argv[0], ".simples"); //função que procura uma string na string e posiciona no início
+    p = strstr(argv[0], ".simples"); // Função que procura uma string na string e posiciona no início
     if (p) *p = 0;
     strcpy(nameIn, argv[0]);
     strcat(nameIn, ".simples");
