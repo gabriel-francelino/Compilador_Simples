@@ -12,6 +12,7 @@ novanlinha [\n]
 
 %x coment
 
+/* acrescentar a palavra chave retorne */
 %%
 programa                    return T_PROGRAMA;
 inicio                      return T_INICIO;
@@ -32,6 +33,7 @@ func                        return T_FUNC;
 fimfunc                     return T_FIMFUNC;
 proc                        return T_PROC;
 fimproc                     return T_FIMPROC;
+retorne                     return T_RETORNE;
 
 
 "+"                         return T_MAIS;

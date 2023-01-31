@@ -1,6 +1,7 @@
 // Estrutura da Tabela de Simbolos
 #include <ctype.h>
 #define TAM_TAB 100
+#define MAX_PAR 20
 enum 
 {
     INT, 
@@ -8,14 +9,15 @@ enum
 };
 
 struct elemTabSimbolos {
-    char id[100];   //identificador
-    int end;    // endereço
-    int tip;    // tipo variável
-    char esc[1];
-    char dsl[1];
-    char rot[3];
-    char cat[3];
-    char *par[50];
+    char id[100];       // identificador
+    int end;            // endereço global ou deslocamento local
+    int tip;            // tipo variável
+    char esc[1];        // escopo: 'g'=GLOBAL, 'l'=LOCAL
+    int rot;            // rotulo (especifico para funcao)
+    char cat;           // categoria: 'f'=FUN, 'p'=PAR, 'v'=VAR
+    int par[MAX_PAR];   // tipos dos parametros (funcao)
+    // int *par;   // tipos dos parametros (funcao) outra alternativa
+    int npa;            // numero de parametros (funcao)
 } tabSimb[TAM_TAB], elemTab;
 
 int posTab = 0;

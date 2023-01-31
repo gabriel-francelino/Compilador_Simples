@@ -17,6 +17,7 @@ Terminals unused in grammar
     T_PROC
     T_FIMPROC
     T_REF
+    T_RETORNE
 
 
 Rules useless in grammar
@@ -157,79 +158,80 @@ Terminals, with rules where they appear
     T_PROC (291)
     T_FIMPROC (292)
     T_REF (293)
+    T_RETORNE (294)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (39)
+    $accept (40)
         on left: 0
-    programa (40)
+    programa (41)
         on left: 3
         on right: 0
-    $@1 (41)
+    $@1 (42)
         on left: 1
         on right: 3
-    $@2 (42)
+    $@2 (43)
         on left: 2
         on right: 3
-    cabecalho (43)
+    cabecalho (44)
         on left: 4
         on right: 3
-    variaveis (44)
+    variaveis (45)
         on left: 5 6
         on right: 3
-    declaracao_variaveis (45)
+    declaracao_variaveis (46)
         on left: 7 8
         on right: 6 7
-    tipo (46)
+    tipo (47)
         on left: 9 10
         on right: 7 8
-    lista_variaveis (47)
+    lista_variaveis (48)
         on left: 11 12
         on right: 7 8 11
-    lista_comandos (48)
+    lista_comandos (49)
         on left: 13 14
         on right: 3 14 25 28
-    comando (49)
+    comando (50)
         on left: 15 16 17 18
         on right: 14
-    entrada_saida (50)
+    entrada_saida (51)
         on left: 19 20
         on right: 15
-    leitura (51)
+    leitura (52)
         on left: 21
         on right: 19
-    escrita (52)
+    escrita (53)
         on left: 22
         on right: 20
-    repeticao (53)
+    repeticao (54)
         on left: 25
         on right: 16
-    $@3 (54)
+    $@3 (55)
         on left: 23
         on right: 25
-    $@4 (55)
+    $@4 (56)
         on left: 24
         on right: 25
-    selecao (56)
+    selecao (57)
         on left: 28
         on right: 17
-    $@5 (57)
+    $@5 (58)
         on left: 26
         on right: 28
-    $@6 (58)
+    $@6 (59)
         on left: 27
         on right: 28
-    atribuicao (59)
+    atribuicao (60)
         on left: 30
         on right: 18
-    $@7 (60)
+    $@7 (61)
         on left: 29
         on right: 30
-    expressao (61)
+    expressao (62)
         on left: 31 32 33 34 35 36 37 38 39 40
         on right: 22 25 28 30 31 32 33 34 35 36 37 38 39 46
-    termo (62)
+    termo (63)
         on left: 41 42 43 44 45 46
         on right: 40 45
 

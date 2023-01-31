@@ -41,11 +41,13 @@ int tipo;
 %token T_F 
 %token T_IDENTIFICADOR
 %token T_NUMERO
+
 %token T_FUNC
 %token T_FIMFUNC
 %token T_PROC
 %token T_FIMPROC
 %token T_REF
+%token T_RETORNE
 
 %start programa
 
