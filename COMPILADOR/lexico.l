@@ -31,8 +31,6 @@ logico                      return T_LOGICO;
 
 func                        return T_FUNC;
 fimfunc                     return T_FIMFUNC;
-proc                        return T_PROC;
-fimproc                     return T_FIMPROC;
 retorne                     return T_RETORNE;
 
 

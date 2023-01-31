@@ -82,10 +82,7 @@ extern int yydebug;
     T_NUMERO = 288,
     T_FUNC = 289,
     T_FIMFUNC = 290,
-    T_PROC = 291,
-    T_FIMPROC = 292,
-    T_REF = 293,
-    T_RETORNE = 294
+    T_RETORNE = 291
   };
 #endif
 

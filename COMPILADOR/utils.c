@@ -57,6 +57,14 @@ void insereSimbolo (struct elemTabSimbolos elem) {
 
 }
 
+//sugestão :
+//desenvolver uma rotina para ajustar o endereço dos parametros
+//na tabela de simbolos e o vetor de parametros da funcao
+//depois que for cadastrado o ultimo parametro
+
+//modificar a rptina mostraTabela para apresentar os outros 
+//campos (esc, rot, cat, ...) da tabela
+
 void mostraTabela() {
     puts("Tabela de Simbolos");
     puts("------------------");

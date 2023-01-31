@@ -44,10 +44,11 @@ int tipo;
 
 %token T_FUNC
 %token T_FIMFUNC
-%token T_PROC
-%token T_FIMPROC
-%token T_REF
 %token T_RETORNE
+//%token T_PROC
+//%token T_FIMPROC
+//%token T_REF
+
 
 %start programa
 
@@ -69,6 +70,8 @@ programa
             if (contaVar) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVar); 
         }
+    // acrescentar as funcoes
+    funcoes
     T_INICIO lista_comandos T_FIM
         { 
             int conta = desempilha();
@@ -88,6 +91,7 @@ variaveis
     | declaracao_variaveis
     ;
 
+//teria que mudar aqui para adaptar para a funcao
 declaracao_variaveis
     : tipo lista_variaveis declaracao_variaveis
     | tipo lista_variaveis
@@ -107,6 +111,7 @@ lista_variaveis
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
             elemTab.tip = tipo;
+            //elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;            
         }
@@ -115,9 +120,29 @@ lista_variaveis
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
             elemTab.tip = tipo;
+            //elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;               
         }
+    ;
+
+//regras para as funcoes
+funcoes
+    :
+    | funcao funcoes
+    ;
+
+funcao  
+    : T_FUNC tipo T_IDENTIFICADOR T_ABRE parametros T_FECHA
+      variaveis T_INICIO lista_comandos T_FIMFUNC
+
+parametros
+    :
+    | parametro parametros
+    ;
+
+parametro
+    : tipo T_IDENTIFICADOR
     ;
 
 lista_comandos
@@ -130,8 +155,16 @@ comando
     | repeticao
     | selecao
     | atribuicao 
+    | retorno
     ;
 
+retorno
+    : T_RETORNE expressao
+      // deve gerar (depois da trad da expressao)
+      // ARZL (valor de retorno), DMEM (se tiver variavel local)
+      // RTSP n 
+    ;
+/*
 rotinas
     : 
     | lista_rotinas
@@ -170,7 +203,7 @@ mecanismo
     :
     | T_REF
     ;
-
+*/
 entrada_saida
     : leitura
     | escrita
@@ -304,14 +337,31 @@ expressao
     | termo
     ;
 
-termo
+// A funcao eh chamada como um termo numa expresao
+
+identificador
     : T_IDENTIFICADOR
+    ;
+
+chamada
+    : // sem parametros eh uma variavel
+    | T_ABRE lista_argumentos T_FECHA
+    ;
+
+lista_argumentos
+    :
+    | expressao  lista_argumentos
+    ;
+
+termo
+    : identificador chamada
+    /* : T_IDENTIFICADOR
         {
             int pos = buscaSimbolo(atomo);
             fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
             empilhar(tabSimb[pos].tip);
             
-        }
+        } */
     | T_NUMERO
         { 
             fprintf(yyout,"\tCRCT\t%s\n", atomo); 
