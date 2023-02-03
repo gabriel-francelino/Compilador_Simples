@@ -8,6 +8,7 @@
 int contaVar;       // conta o número de variáveis
 int rotulo = 0;     // marcar lugares no código
 int tipo;
+char escopo[1];
 %}
 
 %token T_PROGRAMA

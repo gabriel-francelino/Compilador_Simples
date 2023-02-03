@@ -76,18 +76,18 @@ void mostraTabela() {
     printf("\n");
 }
 
-/*  TABELA DE SIMBOLOS COMPLETA
+/*  TABELA DE SIMBOLOS COMPLETA */
 void mostra_tabela() {
     int i;
     printf("Tabela de símbolos");
-    printf("\n%3c | %30s | %s | %s | %s | %s\n",'#', "ID", "END", "tipo", "cat", "tam");
+    printf("\n%3c | %30s | %s | %s | %s | %s | %s | %s | %s\n",'#', "ID", "ESC", "DSL", "ROT", "CAT", "TIP", "NPA", "PAR");
     for (i = 0; i < 60; i++)
         printf("-");
     for (i = 0; i < posTab; i++)
-        printf("\n%3d | %30s | %3d | %4c | %3s | %d", i, TabSimb[i].id, TabSimb[i].endereco, TabSimb[i].tipo, TabSimb[i].cat, TabSimb[i].tam);
+        printf("\n%3d | %30s | %3s | %3d | %3d | %3d | %3d | %3d | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, tabSimb[i].rot, tabSimb[i].cat,  tabSimb[i].tip, tabSimb[i].npa, tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
     puts("\n");
 }
-*/
+
 
 // void testaAritmetico() {
 //     int t1 = desempilha();
