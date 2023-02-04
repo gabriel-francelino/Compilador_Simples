@@ -165,46 +165,7 @@ retorno
       // ARZL (valor de retorno), DMEM (se tiver variavel local)
       // RTSP n 
     ;
-/*
-rotinas
-    : 
-    | lista_rotinas
-    ;
 
-lista_rotinas
-    : lista_rotinas rotina
-    | rotina
-    ;
-
-rotina
-    : funcao
-    | procedimento
-    ;
-
-funcao
-    : T_FUNC tipo T_IDENTIFICADOR T_ABRE lista_parametros T_FECHA
-    variaveis T_INICIO lista_comandos T_FIMFUNC
-    ;
-
-procedimento
-    : T_PROC T_IDENTIFICADOR T_ABRE lista_parametros T_FECHA
-     variaveis T_INICIO lista_comandos T_FIMPROC
-    ;
-
-lista_parametros
-    :
-    | parametro lista_parametros
-    ;
-
-parametro
-    : tipo T_IDENTIFICADOR
-    ;
-
-mecanismo
-    :
-    | T_REF
-    ;
-*/
 entrada_saida
     : leitura
     | escrita
@@ -342,6 +303,12 @@ expressao
 
 identificador
     : T_IDENTIFICADOR
+      {
+            int pos = buscaSimbolo(atomo);
+            fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
+            empilhar(tabSimb[pos].tip);
+            
+      }
     ;
 
 chamada
