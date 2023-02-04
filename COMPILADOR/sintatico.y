@@ -46,9 +46,7 @@ char escopo[1];
 %token T_FUNC
 %token T_FIMFUNC
 %token T_RETORNE
-//%token T_PROC
-//%token T_FIMPROC
-//%token T_REF
+
 
 
 %start programa
@@ -64,16 +62,24 @@ char escopo[1];
 programa 
     : cabecalho 
         { contaVar = 0; }
-    variaveis 
+        variaveis 
         {
-            mostraTabela();
+            mostraTabelaCompleta();
             empilhar(contaVar); 
             if (contaVar) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVar); 
         }
     // acrescentar as funcoes
     funcoes
-    T_INICIO lista_comandos T_FIM
+    T_INICIO   
+        /*variaveis //variaveis locais
+        {
+            mostraTabela();
+            empilhar(contaVar); 
+            if (contaVar) 
+                fprintf(yyout,"\tAMEM\t%d\n", contaVar); 
+        }*/
+        lista_comandos T_FIM
         { 
             int conta = desempilha();
             if (conta)
@@ -134,8 +140,31 @@ funcoes
     ;
 
 funcao  
-    : T_FUNC tipo T_IDENTIFICADOR T_ABRE parametros T_FECHA
-      variaveis T_INICIO lista_comandos T_FIMFUNC
+    : T_FUNC
+        {
+            if(rotulo == 0)
+                fprintf(yyout,"\tDSVF\tL%d\n", rotulo); 
+            empilhar(rotulo);
+        } 
+        tipo T_IDENTIFICADOR
+        {
+            strcpy(elemTab.id, atomo);
+            elemTab.end = contaVar;
+            elemTab.tip = tipo;
+            elemTab.rot = rotulo++;
+            //elemTab.esc = escopo;
+            insereSimbolo(elemTab);
+            contaVar++;
+            
+        }
+        T_ABRE parametros T_FECHA
+        variaveis 
+        T_INICIO
+        {
+            fprintf(yyout,"L%d\tENSP\n", rotulo);     // L de label 
+            empilhar(rotulo);
+        } 
+        lista_comandos T_FIMFUNC
 
 parametros
     :

@@ -64,6 +64,9 @@ void insereSimbolo (struct elemTabSimbolos elem) {
 
 //modificar a rptina mostraTabela para apresentar os outros 
 //campos (esc, rot, cat, ...) da tabela
+char *printaTip(int i){
+    return tabSimb[i].tip == INT? "INT" : "LOG";
+}
 
 void mostraTabela() {
     puts("Tabela de Simbolos");
@@ -81,10 +84,10 @@ void mostraTabelaCompleta() {
     int i;
     printf("Tabela de símbolos");
     printf("\n%3c | %30s | %s | %s | %s | %s | %s | %s | %s\n",'#', "ID", "ESC", "DSL", "ROT", "CAT", "TIP", "NPA", "PAR");
-    for (i = 0; i < 60; i++)
+    for (i = 0; i < 100; i++)
         printf("-");
     for (i = 0; i < posTab; i++)
-        printf("\n%3d | %30s | %3s | %3d | %3d | %3d | %3d | %3d | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, tabSimb[i].rot, tabSimb[i].cat,  tabSimb[i].tip, tabSimb[i].npa, tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
+        printf("\n%3d | %30s | %3s | %3d | %3d | %3d | %3s | %3d | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, tabSimb[i].rot, tabSimb[i].cat,  printaTip(i), tabSimb[i].npa, 0/*tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
     puts("\n");
 }
 

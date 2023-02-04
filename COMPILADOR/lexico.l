@@ -28,7 +28,6 @@ faca                        return T_FACA;
 fimenquanto                 return T_FIMENQUANTO;
 inteiro                     return T_INTEIRO;
 logico                      return T_LOGICO;
-
 func                        return T_FUNC;
 fimfunc                     return T_FIMFUNC;
 retorne                     return T_RETORNE;

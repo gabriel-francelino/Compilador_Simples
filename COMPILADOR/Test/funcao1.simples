@@ -1,0 +1,12 @@
+programa TesteFunc
+    inteiro a
+    logico b
+    func inteiro soma2 ( inteiro a )
+    inicio
+        a <- a + 2
+        retorne a
+    fimfunc
+inicio
+    a <- 10
+    a <- soma2( a )
+fimprograma
