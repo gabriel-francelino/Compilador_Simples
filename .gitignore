@@ -1,5 +1,4 @@
 *.mvs
 *.output
 *.h
-sintatico.c
-lexico.c
+
