@@ -6,9 +6,12 @@
 #include "lexico.c"
 #include "utils.c"
 int contaVar;       // conta o número de variáveis
+int contaVarG;      // conta número de variáveis globais
+int contaVarL;      // conta número de variáveis locais
 int rotulo = 0;     // marcar lugares no código
 int tipo;
 char escopo[1];
+int npar = 0;
 %}
 
 %token T_PROGRAMA
@@ -60,8 +63,11 @@ char escopo[1];
 %%
 
 programa 
-    : cabecalho 
-        { contaVar = 0; }
+    :   cabecalho 
+        { 
+            contaVar = 0; 
+            contaVarL = 0;
+        }
         variaveis 
         {
             mostraTabelaCompleta();
@@ -69,9 +75,15 @@ programa
             if (contaVar) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVar); 
         }
-    // acrescentar as funcoes
-    funcoes
-    T_INICIO   
+        // acrescentar as funcoes
+        funcoes
+        T_INICIO
+        {
+            if(rotulo != 0){
+                int rot = desempilha();
+                fprintf(yyout,"L%d\tENSP\n", rot);
+            }   
+        }   
         /*variaveis //variaveis locais
         {
             mostraTabela();
@@ -161,7 +173,7 @@ funcao
         variaveis 
         T_INICIO
         {
-            fprintf(yyout,"L%d\tENSP\n", rotulo);     // L de label 
+            fprintf(yyout,"L%d\tENSP\n", rotulo);     
             empilhar(rotulo);
         } 
         lista_comandos T_FIMFUNC
@@ -190,6 +202,9 @@ comando
 
 retorno
     : T_RETORNE expressao
+        {
+            fprintf(yyout,"\tRTSP\t%d\n", 0); // RTSP n => onde n é numero de parametros
+        }
       // deve gerar (depois da trad da expressao)
       // ARZL (valor de retorno), DMEM (se tiver variavel local)
       // RTSP n 
