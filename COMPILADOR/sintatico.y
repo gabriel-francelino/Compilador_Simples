@@ -106,26 +106,26 @@ cabecalho
     ;
 
 variaveis
-    : /* vazio */
-    | declaracao_variaveis
+    :   /* vazio */
+    |   declaracao_variaveis
     ;
 
 //teria que mudar aqui para adaptar para a funcao
 declaracao_variaveis
-    : tipo lista_variaveis declaracao_variaveis
-    | tipo lista_variaveis
+    :   tipo lista_variaveis declaracao_variaveis
+    |   tipo lista_variaveis
     ;
 
 //REGRA "tipo"
 tipo        
-    : T_LOGICO
+    :   T_LOGICO
         { tipo = LOG; }     // Variável "tipo"
-    | T_INTEIRO
+    |   T_INTEIRO
         { tipo = INT; }
     ;
 
 lista_variaveis
-    : lista_variaveis T_IDENTIFICADOR 
+    :   lista_variaveis T_IDENTIFICADOR 
         {  
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
@@ -134,7 +134,7 @@ lista_variaveis
             insereSimbolo(elemTab);
             contaVar++;            
         }
-    | T_IDENTIFICADOR
+    |   T_IDENTIFICADOR
         { 
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
@@ -148,11 +148,11 @@ lista_variaveis
 //regras para as funcoes
 funcoes
     :
-    | funcao funcoes
+    |   funcao funcoes
     ;
 
 funcao  
-    : T_FUNC
+    :   T_FUNC
         {
             if(rotulo == 0)
                 fprintf(yyout,"\tDSVF\tL%d\n", rotulo); 
@@ -180,28 +180,28 @@ funcao
 
 parametros
     :
-    | parametro parametros
+    |   parametro parametros
     ;
 
 parametro
-    : tipo T_IDENTIFICADOR
+    :   tipo T_IDENTIFICADOR
     ;
 
 lista_comandos
-    : /* vazio */
-    | comando lista_comandos
+    :   /* vazio */
+    |   comando lista_comandos
     ;
 
 comando 
-    : entrada_saida
-    | repeticao
-    | selecao
-    | atribuicao 
-    | retorno
+    :   entrada_saida
+    |   repeticao
+    |   selecao
+    |   atribuicao 
+    |   retorno
     ;
 
 retorno
-    : T_RETORNE expressao
+    :   T_RETORNE expressao
         {
             fprintf(yyout,"\tRTSP\t%d\n", 0); // RTSP n => onde n é numero de parametros
         }
@@ -211,12 +211,12 @@ retorno
     ;
 
 entrada_saida
-    : leitura
-    | escrita
+    :   leitura
+    |   escrita
     ;
 
 leitura 
-    : T_LEIA T_IDENTIFICADOR
+    :   T_LEIA T_IDENTIFICADOR
         { 
             int pos = buscaSimbolo(atomo);         
             fprintf(yyout,"\tLEIA\n\tARZG\t%d\n", tabSimb[pos].end); 
@@ -224,7 +224,7 @@ leitura
     ;
 
 escrita 
-    : T_ESCREVA expressao
+    :   T_ESCREVA expressao
         { 
             desempilha();
             fprintf(yyout,"\tESCR\n"); 
@@ -232,12 +232,12 @@ escrita
     ;
 
 repeticao
-    : T_ENQUANTO 
+    :   T_ENQUANTO 
         { 
             fprintf(yyout,"L%d\tNADA\n", ++rotulo);     // L de label 
             empilhar(rotulo);
         } 
-    expressao T_FACA 
+        expressao T_FACA 
         { 
             int tip = desempilha();
             if (tip != LOG)
@@ -245,8 +245,8 @@ repeticao
             fprintf(yyout,"\tDSVF\tL%d\n", ++rotulo); 
             empilhar(rotulo);
         }
-    lista_comandos 
-    T_FIMENQUANTO
+        lista_comandos 
+        T_FIMENQUANTO
         { 
             int rot1 = desempilha();
             int rot2 = desempilha();
@@ -256,7 +256,7 @@ repeticao
     ;
 
 selecao
-    : T_SE expressao T_ENTAO 
+    :   T_SE expressao T_ENTAO 
         { 
             int tip = desempilha();
             if (tip != LOG)
@@ -264,14 +264,14 @@ selecao
             fprintf(yyout,"\tDSVF\tL%d\n", ++rotulo); 
             empilhar(rotulo);
         }
-    lista_comandos T_SENAO
+        lista_comandos T_SENAO
         { 
             int rot = desempilha();
             fprintf(yyout,"\tDSVS\tL%d\n", ++rotulo); 
             fprintf(yyout,"L%d\tNADA\n", rot); 
             empilhar(rotulo);
         }
-    lista_comandos T_FIMSE
+        lista_comandos T_FIMSE
         { 
             int rot = desempilha();
             fprintf(yyout,"L%d\tNADA\n", rot); 
@@ -279,12 +279,12 @@ selecao
     ;
 
 atribuicao
-    : T_IDENTIFICADOR
+    :   T_IDENTIFICADOR
         {
             int pos = buscaSimbolo(atomo);
             empilhar(pos);
         }
-    T_ATRIBUICAO expressao
+        T_ATRIBUICAO expressao
         { 
             int tip = desempilha();
             int pos = desempilha();
@@ -295,78 +295,78 @@ atribuicao
     ;
 
 expressao
-    : expressao T_VEZES expressao
+    :   expressao T_VEZES expressao
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tMULT\n"); 
         }
-    | expressao T_DIV expressao
+    |   expressao T_DIV expressao
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tDIVI\n"); 
         }
-    | expressao T_MAIS expressao
+    |   expressao T_MAIS expressao
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tSOMA\n"); 
         }
-    | expressao T_MENOS expressao
+    |   expressao T_MENOS expressao
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tSUBT\n"); 
         }
-    | expressao T_MAIOR expressao
+    |   expressao T_MAIOR expressao
         { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMMA\n"); 
         }
-    | expressao T_MENOR expressao
+    |   expressao T_MENOR expressao
         { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMME\n"); 
         }
-    | expressao T_IGUAL expressao
+    |   expressao T_IGUAL expressao
         { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMIG\n"); 
         }
-    | expressao T_E expressao
+    |   expressao T_E expressao
         { 
             testaTipo(LOG, LOG, LOG);
             fprintf(yyout,"\tCONJ\n"); 
         }
-    | expressao T_OU expressao
+    |   expressao T_OU expressao
         { 
             testaTipo(LOG, LOG, LOG);
             fprintf(yyout,"\tDISJ\n"); 
         }
-    | termo
+    |   termo
     ;
 
 // A funcao eh chamada como um termo numa expresao
 
 identificador
-    : T_IDENTIFICADOR
-      {
+    :   T_IDENTIFICADOR
+        {
             int pos = buscaSimbolo(atomo);
             fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
             empilhar(tabSimb[pos].tip);
             
-      }
+        }
     ;
 
 chamada
     : // sem parametros eh uma variavel
-    | T_ABRE lista_argumentos T_FECHA
+    |   T_ABRE lista_argumentos T_FECHA
     ;
 
 lista_argumentos
     :
-    | expressao  lista_argumentos
+    |   expressao  lista_argumentos
     ;
 
 termo
-    : identificador chamada
+    :   identificador chamada
     /* : T_IDENTIFICADOR
         {
             int pos = buscaSimbolo(atomo);
@@ -374,29 +374,29 @@ termo
             empilhar(tabSimb[pos].tip);
             
         } */
-    | T_NUMERO
+    |   T_NUMERO
         { 
             fprintf(yyout,"\tCRCT\t%s\n", atomo); 
             empilhar(INT);
         }
-    | T_V
+    |   T_V
         { 
             fprintf(yyout,"\tCRCT\t1\n"); 
             empilhar(LOG);
         }
-    | T_F
+    |   T_F
         { 
             fprintf(yyout,"\tCRCT\t0\n"); 
             empilhar(LOG);
         }
-    | T_NAO termo
+    |   T_NAO termo
         { 
             int t = desempilha();
             if (t != LOG) yyerror ("Incompatibilidade de tipo!");       // Verificação se o termo é lógico
             fprintf(yyout,"\tNEGA\n"); 
             empilhar(LOG);
         }
-    | T_ABRE expressao T_FECHA
+    |   T_ABRE expressao T_FECHA
     ;
 
 %%

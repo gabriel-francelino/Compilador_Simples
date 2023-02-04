@@ -6,6 +6,10 @@ programa TesteFunc
         a <- a + 2
         retorne a
     fimfunc
+    /*func inteiro sub ( inteiro b )
+    inicio
+        retorne b - 2
+    fimfunc*/
 inicio
     a <- 10
     a <- soma2( a )

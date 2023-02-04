@@ -1741,12 +1741,12 @@ yyreduce:
 
   case 54:
 #line 350 "sintatico.y"
-      {
+        {
             int pos = buscaSimbolo(atomo);
             fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
             empilhar(tabSimb[pos].tip);
             
-      }
+        }
 #line 1751 "sintatico.c"
     break;
 
