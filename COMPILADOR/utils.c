@@ -77,7 +77,7 @@ void mostraTabela() {
 }
 
 /*  TABELA DE SIMBOLOS COMPLETA */
-void mostra_tabela() {
+void mostraTabelaCompleta() {
     int i;
     printf("Tabela de símbolos");
     printf("\n%3c | %30s | %s | %s | %s | %s | %s | %s | %s\n",'#', "ID", "ESC", "DSL", "ROT", "CAT", "TIP", "NPA", "PAR");
