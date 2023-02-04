@@ -81,7 +81,7 @@ programa
         {
             if(rotulo != 0){
                 int rot = desempilha();
-                fprintf(yyout,"L%d\tENSP\n", rot);
+                fprintf(yyout,"L%d\tNADA\n", rot);
             }   
         }   
         /*variaveis //variaveis locais
@@ -165,7 +165,7 @@ funcao
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
             elemTab.tip = tipo;
-            elemTab.rot = rotulo;
+            elemTab.rot = ++rotulo;
             elemTab.cat = 'f';
             //elemTab.esc = escopo;
             insereSimbolo(elemTab);

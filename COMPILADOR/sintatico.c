@@ -1452,7 +1452,7 @@ yyreduce:
         {
             if(rotulo != 0){
                 int rot = desempilha();
-                fprintf(yyout,"L%d\tENSP\n", rot);
+                fprintf(yyout,"L%d\tNADA\n", rot);
             }   
         }
 #line 1459 "sintatico.c"
@@ -1531,7 +1531,7 @@ yyreduce:
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
             elemTab.tip = tipo;
-            elemTab.rot = rotulo;
+            elemTab.rot = ++rotulo;
             elemTab.cat = 'f';
             //elemTab.esc = escopo;
             insereSimbolo(elemTab);
