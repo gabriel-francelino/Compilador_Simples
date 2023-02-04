@@ -130,6 +130,7 @@ lista_variaveis
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
             elemTab.tip = tipo;
+            elemTab.cat = 'v';
             //elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;            
@@ -139,6 +140,7 @@ lista_variaveis
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
             elemTab.tip = tipo;
+            elemTab.cat = 'v';
             //elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;               
@@ -163,10 +165,12 @@ funcao
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
             elemTab.tip = tipo;
-            elemTab.rot = rotulo++;
+            elemTab.rot = rotulo;
+            elemTab.cat = 'f';
             //elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;
+            mostraTabelaCompleta();
             
         }
         T_ABRE parametros T_FECHA
@@ -198,6 +202,7 @@ comando
     |   selecao
     |   atribuicao 
     |   retorno
+    //|   chamada //não tenho certeza se precisa
     ;
 
 retorno
@@ -358,6 +363,9 @@ identificador
 chamada
     : // sem parametros eh uma variavel
     |   T_ABRE lista_argumentos T_FECHA
+        {
+            fprintf(yyout,"\tAMEM\t%d\n", 5); //TESTE
+        }
     ;
 
 lista_argumentos

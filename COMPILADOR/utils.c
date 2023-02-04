@@ -87,7 +87,7 @@ void mostraTabelaCompleta() {
     for (i = 0; i < 100; i++)
         printf("-");
     for (i = 0; i < posTab; i++)
-        printf("\n%3d | %30s | %3s | %3d | %3d | %3d | %3s | %3d | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, tabSimb[i].rot, tabSimb[i].cat,  printaTip(i), tabSimb[i].npa, 0/*tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
+        printf("\n%3d | %30s | %3s | %3d | %3d | %3c | %3s | %3d | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, tabSimb[i].rot, tabSimb[i].cat,  printaTip(i), tabSimb[i].npa, 0/*tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
     puts("\n");
 }
 
