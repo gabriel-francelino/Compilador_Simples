@@ -10,7 +10,7 @@ int contaVarG;      // conta número de variáveis globais
 int contaVarL;      // conta número de variáveis locais
 int rotulo = 0;     // marcar lugares no código
 int tipo;
-char escopo[1];
+char escopo;
 int npar = 0;
 %}
 
@@ -50,9 +50,8 @@ int npar = 0;
 %token T_FIMFUNC
 %token T_RETORNE
 
-
-
 %start programa
+%expect 1
 
 %left T_E T_OU
 %left T_IGUAL
@@ -66,7 +65,8 @@ programa
     :   cabecalho 
         { 
             contaVar = 0; 
-            contaVarL = 0;
+            contaVarL = 0;  //conta variaveis locais - teste
+            escopo = 'G';
         }
         variaveis 
         {
@@ -79,7 +79,7 @@ programa
         funcoes
         T_INICIO
         {
-            if(rotulo != 0){
+            if(rotulo != 0){    //só quando encontrar a primeira função que vai desviar para o LO NADA
                 int rot = desempilha();
                 fprintf(yyout,"L%d\tNADA\n", rot);
             }   
@@ -130,8 +130,8 @@ lista_variaveis
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
             elemTab.tip = tipo;
-            elemTab.cat = 'v';
-            //elemTab.esc = escopo;
+            elemTab.cat = 'V';
+            elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;            
         }
@@ -140,8 +140,8 @@ lista_variaveis
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
             elemTab.tip = tipo;
-            elemTab.cat = 'v';
-            //elemTab.esc = escopo;
+            elemTab.cat = 'V';
+            elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;               
         }
@@ -166,21 +166,25 @@ funcao
             elemTab.end = contaVar;
             elemTab.tip = tipo;
             elemTab.rot = ++rotulo;
-            elemTab.cat = 'f';
-            //elemTab.esc = escopo;
+            elemTab.cat = 'F';
+            elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;
-            mostraTabelaCompleta();
-            
-        }
-        T_ABRE parametros T_FECHA
-        variaveis 
-        T_INICIO
-        {
             fprintf(yyout,"L%d\tENSP\n", rotulo);     
             empilhar(rotulo);
+            escopo = 'L';           
+        }
+        T_ABRE parametros T_FECHA
+        //{
+        //  ajustar_parametros(); depois de passar pelo fecha
+        //}
+        variaveis 
+        T_INICIO lista_comandos T_FIMFUNC
+        {
+            //remover_var_locais()
+            //escopo = 'g'
+            mostraTabelaCompleta();
         } 
-        lista_comandos T_FIMFUNC
 
 parametros
     :
@@ -189,6 +193,7 @@ parametros
 
 parametro
     :   tipo T_IDENTIFICADOR
+        // {cadastrar o parametro}
     ;
 
 lista_comandos
@@ -362,10 +367,11 @@ identificador
 
 chamada
     : // sem parametros eh uma variavel
-    |   T_ABRE lista_argumentos T_FECHA
+    |   T_ABRE 
         {
             fprintf(yyout,"\tAMEM\t%d\n", 5); //TESTE
         }
+        lista_argumentos T_FECHA
     ;
 
 lista_argumentos

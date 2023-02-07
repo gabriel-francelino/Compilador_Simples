@@ -79,7 +79,7 @@ int contaVarG;      // conta número de variáveis globais
 int contaVarL;      // conta número de variáveis locais
 int rotulo = 0;     // marcar lugares no código
 int tipo;
-char escopo[1];
+char escopo;
 int npar = 0;
 
 #line 86 "sintatico.c"
@@ -545,13 +545,13 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    67,    67,    72,    81,    66,   104,   109,   110,   115,
-     116,   121,   123,   128,   138,   152,   153,   158,   164,   179,
-     157,   186,   187,   191,   195,   196,   200,   201,   202,   203,
-     204,   209,   219,   220,   224,   232,   241,   246,   240,   265,
-     273,   264,   288,   287,   303,   308,   313,   318,   323,   328,
-     333,   338,   343,   348,   354,   364,   365,   372,   373,   377,
-     385,   390,   395,   400,   407
+       0,    66,    66,    72,    81,    65,   104,   109,   110,   115,
+     116,   121,   123,   128,   138,   152,   153,   158,   164,   157,
+     190,   191,   195,   200,   201,   205,   206,   207,   208,   209,
+     214,   224,   225,   229,   237,   246,   251,   245,   270,   278,
+     269,   293,   292,   308,   313,   318,   323,   328,   333,   338,
+     343,   348,   353,   359,   369,   371,   370,   378,   379,   383,
+     391,   396,   401,   406,   413
 };
 #endif
 
@@ -568,10 +568,10 @@ static const char *const yytname[] =
   "T_F", "T_IDENTIFICADOR", "T_NUMERO", "T_FUNC", "T_FIMFUNC", "T_RETORNE",
   "$accept", "programa", "$@1", "$@2", "$@3", "cabecalho", "variaveis",
   "declaracao_variaveis", "tipo", "lista_variaveis", "funcoes", "funcao",
-  "$@4", "$@5", "$@6", "parametros", "parametro", "lista_comandos",
-  "comando", "retorno", "entrada_saida", "leitura", "escrita", "repeticao",
-  "$@7", "$@8", "selecao", "$@9", "$@10", "atribuicao", "$@11",
-  "expressao", "identificador", "chamada", "lista_argumentos", "termo", YY_NULLPTR
+  "$@4", "$@5", "parametros", "parametro", "lista_comandos", "comando",
+  "retorno", "entrada_saida", "leitura", "escrita", "repeticao", "$@6",
+  "$@7", "selecao", "$@8", "$@9", "atribuicao", "$@10", "expressao",
+  "identificador", "chamada", "$@11", "lista_argumentos", "termo", YY_NULLPTR
 };
 #endif
 
@@ -605,13 +605,13 @@ static const yytype_int8 yypact[] =
      -34,     3,     4,   -34,    -4,   -34,    27,     4,   -34,   -34,
        0,   -34,   -34,     5,    -3,   -34,    17,   -13,   -13,   -34,
      -34,   -13,    29,    -3,   -34,   -34,   -34,   -34,   -34,   -34,
-     -34,     9,   -34,   -13,   -13,   -34,   -34,   -34,   -34,   110,
-      23,   -34,    76,   -13,    22,   110,   -34,   -34,     0,   -34,
-      98,   -13,   -13,   -13,   -13,   -13,   -13,   -13,   -13,   -13,
-     -13,   -34,   -34,    89,   -13,    20,    26,     0,   -34,     2,
-       2,   -34,   -34,     7,     7,   119,    42,    42,    57,    28,
-      -3,   -34,   110,   -34,     0,   -34,   -34,   -34,    45,    -3,
-      63,   -34,    54,   -34,    -3,   -34,    -3,    58,    35,   -34,
+     -34,     9,   -34,   -13,   -13,   -34,   -34,   -34,   -34,   109,
+      23,   -34,    75,   -13,    22,   109,   -34,   -34,     0,   -34,
+      97,   -13,   -13,   -13,   -13,   -13,   -13,   -13,   -13,   -13,
+     -34,   -34,   -34,    88,   -13,    20,    26,     0,   -34,     2,
+       2,   -34,   -34,     7,     7,    42,   118,   118,   -13,    -3,
+     -34,   109,   -34,     0,   -34,    56,    38,    45,    -3,    53,
+     -34,   -34,   -34,    54,    -3,    -3,   -34,    32,    58,   -34,
      -34
 };
 
@@ -622,34 +622,34 @@ static const yytype_int8 yydefact[] =
 {
        0,     0,     0,     2,     6,     1,     7,    12,    11,     3,
        8,     0,    15,    14,    10,    17,     0,    15,    13,     9,
-       0,     4,    16,     0,    24,    18,     0,     0,     0,    36,
-      42,     0,     0,    24,    30,    26,    32,    33,    27,    28,
-      29,     0,    34,     0,     0,    61,    62,    54,    60,    35,
-      55,    53,     0,     0,     0,    31,     5,    25,    21,    63,
+       0,     4,    16,     0,    23,    18,     0,     0,     0,    35,
+      41,     0,     0,    23,    29,    25,    31,    32,    26,    27,
+      28,     0,    33,     0,     0,    61,    62,    53,    60,    34,
+      54,    52,     0,     0,     0,    30,     5,    24,    20,    63,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-      57,    59,    39,     0,     0,     0,     0,    21,    64,    46,
-      47,    44,    45,    48,    49,    50,    51,    52,    57,     0,
-      24,    37,    43,    23,     7,    22,    58,    56,     0,    24,
-       0,    40,     0,    19,    24,    38,    24,     0,     0,    41,
-      20
+      55,    59,    38,     0,     0,     0,     0,    20,    64,    45,
+      46,    43,    44,    47,    48,    49,    50,    51,    57,    23,
+      36,    42,    22,     7,    21,    57,     0,     0,    23,     0,
+      58,    56,    39,     0,    23,    23,    37,     0,     0,    19,
+      40
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -34,   -34,   -34,   -34,   -34,   -34,   -22,    72,   -19,   -34,
-      74,   -34,   -34,   -34,   -34,    15,   -34,   -33,   -34,   -34,
+     -34,   -34,   -34,   -34,   -34,   -34,   -23,    71,   -19,   -34,
+      73,   -34,   -34,   -34,    14,   -34,   -33,   -34,   -34,   -34,
      -34,   -34,   -34,   -34,   -34,   -34,   -34,   -34,   -34,   -34,
-     -34,   -21,   -34,   -34,    16,    60
+     -21,   -34,   -34,   -34,     8,    59
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
       -1,     2,     6,    12,    24,     3,     9,    10,    11,    14,
-      16,    17,    20,    41,   106,    76,    77,    32,    33,    34,
-      35,    36,    37,    38,    53,    99,    39,    90,   104,    40,
-      54,    88,    50,    71,    89,    51
+      16,    17,    20,    41,    76,    77,    32,    33,    34,    35,
+      36,    37,    38,    53,    98,    39,    89,   105,    40,    54,
+      95,    50,    71,    88,    96,    51
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -662,16 +662,16 @@ static const yytype_int8 yytable[] =
       48,    63,    64,    60,    61,    62,    63,    64,    18,    30,
        5,    21,    73,    31,    56,    13,    58,    25,    15,    75,
       79,    80,    81,    82,    83,    84,    85,    86,    87,    42,
-      70,    74,    93,    92,    94,   101,    97,    98,    75,    61,
-      62,    63,    64,    65,    66,    67,   102,   103,   105,   109,
-     110,   107,   100,   108,    61,    62,    63,    64,    65,    66,
-      67,    68,    69,    43,    44,    72,    19,    45,    46,    47,
-      48,    22,    95,    61,    62,    63,    64,    65,    66,    67,
-      68,    69,    91,    59,    96,     0,    61,    62,    63,    64,
+      70,    74,    92,    91,    93,   102,    97,   104,    75,    61,
+      62,    63,    64,    65,    66,   103,   101,   109,   106,   110,
+      99,   107,   108,    61,    62,    63,    64,    65,    66,    67,
+      68,    69,    43,    44,    72,    19,    45,    46,    47,    48,
+      22,    94,    61,    62,    63,    64,    65,    66,    67,    68,
+      69,    90,    59,   100,     0,    61,    62,    63,    64,    65,
+      66,    67,    68,    69,    61,    62,    63,    64,    65,    66,
+      67,    68,    69,     0,     0,    78,    61,    62,    63,    64,
       65,    66,    67,    68,    69,    61,    62,    63,    64,    65,
-      66,    67,    68,    69,     0,     0,    78,    61,    62,    63,
-      64,    65,    66,    67,    68,    69,    61,    62,    63,    64,
-      65,    66
+      66,    67
 };
 
 static const yytype_int8 yycheck[] =
@@ -681,16 +681,16 @@ static const yytype_int8 yycheck[] =
       33,    19,    20,    44,    17,    18,    19,    20,    32,    32,
        0,     4,    53,    36,     5,    32,    27,    32,    34,    58,
       61,    62,    63,    64,    65,    66,    67,    68,    69,    32,
-      27,    29,    32,    74,    28,    10,    28,    90,    77,    17,
-      18,    19,    20,    21,    22,    23,    99,     4,    14,    11,
-      35,   104,    94,   106,    17,    18,    19,    20,    21,    22,
-      23,    24,    25,    26,    27,     9,    14,    30,    31,    32,
-      33,    17,    77,    17,    18,    19,    20,    21,    22,    23,
-      24,    25,    13,    43,    88,    -1,    17,    18,    19,    20,
+      27,    29,    32,    74,    28,    10,    89,     4,    77,    17,
+      18,    19,    20,    21,    22,    98,    28,    35,    14,    11,
+      93,   104,   105,    17,    18,    19,    20,    21,    22,    23,
+      24,    25,    26,    27,     9,    14,    30,    31,    32,    33,
+      17,    77,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    13,    43,    95,    -1,    17,    18,    19,    20,    21,
+      22,    23,    24,    25,    17,    18,    19,    20,    21,    22,
+      23,    24,    25,    -1,    -1,    28,    17,    18,    19,    20,
       21,    22,    23,    24,    25,    17,    18,    19,    20,    21,
-      22,    23,    24,    25,    -1,    -1,    28,    17,    18,    19,
-      20,    21,    22,    23,    24,    25,    17,    18,    19,    20,
-      21,    22
+      22,    23
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -700,26 +700,26 @@ static const yytype_int8 yystos[] =
        0,     3,    38,    42,    32,     0,    39,    15,    16,    43,
       44,    45,    40,    32,    46,    34,    47,    48,    32,    44,
       49,     4,    47,    45,    41,    32,     6,     7,     8,    12,
-      32,    36,    54,    55,    56,    57,    58,    59,    60,    63,
-      66,    50,    32,    26,    27,    30,    31,    32,    33,    68,
-      69,    72,    68,    61,    67,    68,     5,    54,    27,    72,
-      68,    17,    18,    19,    20,    21,    22,    23,    24,    25,
-      27,    70,     9,    68,    29,    45,    52,    53,    28,    68,
-      68,    68,    68,    68,    68,    68,    68,    68,    68,    71,
-      64,    13,    68,    32,    28,    52,    71,    28,    54,    62,
-      43,    10,    54,     4,    65,    14,    51,    54,    54,    11,
-      35
+      32,    36,    53,    54,    55,    56,    57,    58,    59,    62,
+      65,    50,    32,    26,    27,    30,    31,    32,    33,    67,
+      68,    72,    67,    60,    66,    67,     5,    53,    27,    72,
+      67,    17,    18,    19,    20,    21,    22,    23,    24,    25,
+      27,    69,     9,    67,    29,    45,    51,    52,    28,    67,
+      67,    67,    67,    67,    67,    67,    67,    67,    70,    63,
+      13,    67,    32,    28,    51,    67,    71,    53,    61,    43,
+      71,    28,    10,    53,     4,    64,    14,    53,    53,    35,
+      11
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
        0,    37,    39,    40,    41,    38,    42,    43,    43,    44,
-      44,    45,    45,    46,    46,    47,    47,    49,    50,    51,
-      48,    52,    52,    53,    54,    54,    55,    55,    55,    55,
-      55,    56,    57,    57,    58,    59,    61,    62,    60,    64,
-      65,    63,    67,    66,    68,    68,    68,    68,    68,    68,
-      68,    68,    68,    68,    69,    70,    70,    71,    71,    72,
+      44,    45,    45,    46,    46,    47,    47,    49,    50,    48,
+      51,    51,    52,    53,    53,    54,    54,    54,    54,    54,
+      55,    56,    56,    57,    58,    60,    61,    59,    63,    64,
+      62,    66,    65,    67,    67,    67,    67,    67,    67,    67,
+      67,    67,    67,    68,    69,    70,    69,    71,    71,    72,
       72,    72,    72,    72,    72
 };
 
@@ -727,11 +727,11 @@ static const yytype_int8 yyr1[] =
 static const yytype_int8 yyr2[] =
 {
        0,     2,     0,     0,     0,     9,     2,     0,     1,     3,
-       2,     1,     1,     2,     1,     0,     2,     0,     0,     0,
-      13,     0,     2,     2,     0,     2,     1,     1,     1,     1,
-       1,     2,     1,     1,     2,     2,     0,     0,     7,     0,
-       0,     9,     0,     4,     3,     3,     3,     3,     3,     3,
-       3,     3,     3,     1,     1,     0,     3,     0,     2,     2,
+       2,     1,     1,     2,     1,     0,     2,     0,     0,    12,
+       0,     2,     2,     0,     2,     1,     1,     1,     1,     1,
+       2,     1,     1,     2,     2,     0,     0,     7,     0,     0,
+       9,     0,     4,     3,     3,     3,     3,     3,     3,     3,
+       3,     3,     1,     1,     0,     0,     4,     0,     2,     2,
        1,     1,     1,     2,     3
 };
 
@@ -1428,12 +1428,13 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 67 "sintatico.y"
+#line 66 "sintatico.y"
         { 
             contaVar = 0; 
-            contaVarL = 0;
+            contaVarL = 0;  //conta variaveis locais - teste
+            escopo = 'G';
         }
-#line 1437 "sintatico.c"
+#line 1438 "sintatico.c"
     break;
 
   case 3:
@@ -1444,18 +1445,18 @@ yyreduce:
             if (contaVar) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVar); 
         }
-#line 1448 "sintatico.c"
+#line 1449 "sintatico.c"
     break;
 
   case 4:
 #line 81 "sintatico.y"
         {
-            if(rotulo != 0){
+            if(rotulo != 0){    //só quando encontrar a primeira função que vai desviar para o LO NADA
                 int rot = desempilha();
                 fprintf(yyout,"L%d\tNADA\n", rot);
             }   
         }
-#line 1459 "sintatico.c"
+#line 1460 "sintatico.c"
     break;
 
   case 5:
@@ -1466,25 +1467,25 @@ yyreduce:
                 fprintf(yyout, "\tDMEM\t%d\n", conta); 
             fprintf(yyout, "\tFIMP\n");
         }
-#line 1470 "sintatico.c"
+#line 1471 "sintatico.c"
     break;
 
   case 6:
 #line 105 "sintatico.y"
         { fprintf(yyout,"\tINPP\n"); }
-#line 1476 "sintatico.c"
+#line 1477 "sintatico.c"
     break;
 
   case 11:
 #line 122 "sintatico.y"
         { tipo = LOG; }
-#line 1482 "sintatico.c"
+#line 1483 "sintatico.c"
     break;
 
   case 12:
 #line 124 "sintatico.y"
         { tipo = INT; }
-#line 1488 "sintatico.c"
+#line 1489 "sintatico.c"
     break;
 
   case 13:
@@ -1493,12 +1494,12 @@ yyreduce:
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
             elemTab.tip = tipo;
-            elemTab.cat = 'v';
-            //elemTab.esc = escopo;
+            elemTab.cat = 'V';
+            elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;            
         }
-#line 1502 "sintatico.c"
+#line 1503 "sintatico.c"
     break;
 
   case 14:
@@ -1507,12 +1508,12 @@ yyreduce:
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
             elemTab.tip = tipo;
-            elemTab.cat = 'v';
-            //elemTab.esc = escopo;
+            elemTab.cat = 'V';
+            elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;               
         }
-#line 1516 "sintatico.c"
+#line 1517 "sintatico.c"
     break;
 
   case 17:
@@ -1522,7 +1523,7 @@ yyreduce:
                 fprintf(yyout,"\tDSVF\tL%d\n", rotulo); 
             empilhar(rotulo);
         }
-#line 1526 "sintatico.c"
+#line 1527 "sintatico.c"
     break;
 
   case 18:
@@ -1532,62 +1533,64 @@ yyreduce:
             elemTab.end = contaVar;
             elemTab.tip = tipo;
             elemTab.rot = ++rotulo;
-            elemTab.cat = 'f';
-            //elemTab.esc = escopo;
+            elemTab.cat = 'F';
+            elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;
-            mostraTabelaCompleta();
-            
+            fprintf(yyout,"L%d\tENSP\n", rotulo);     
+            empilhar(rotulo);
+            escopo = 'L';           
         }
-#line 1543 "sintatico.c"
+#line 1545 "sintatico.c"
     break;
 
   case 19:
-#line 179 "sintatico.y"
+#line 183 "sintatico.y"
         {
-            fprintf(yyout,"L%d\tENSP\n", rotulo);     
-            empilhar(rotulo);
+            //remover_var_locais()
+            //escopo = 'g'
+            mostraTabelaCompleta();
         }
-#line 1552 "sintatico.c"
+#line 1555 "sintatico.c"
     break;
 
-  case 31:
-#line 210 "sintatico.y"
+  case 30:
+#line 215 "sintatico.y"
         {
             fprintf(yyout,"\tRTSP\t%d\n", 0); // RTSP n => onde n é numero de parametros
         }
-#line 1560 "sintatico.c"
+#line 1563 "sintatico.c"
     break;
 
-  case 34:
-#line 225 "sintatico.y"
+  case 33:
+#line 230 "sintatico.y"
         { 
             int pos = buscaSimbolo(atomo);         
             fprintf(yyout,"\tLEIA\n\tARZG\t%d\n", tabSimb[pos].end); 
         }
-#line 1569 "sintatico.c"
+#line 1572 "sintatico.c"
     break;
 
-  case 35:
-#line 233 "sintatico.y"
+  case 34:
+#line 238 "sintatico.y"
         { 
             desempilha();
             fprintf(yyout,"\tESCR\n"); 
         }
-#line 1578 "sintatico.c"
+#line 1581 "sintatico.c"
     break;
 
-  case 36:
-#line 241 "sintatico.y"
+  case 35:
+#line 246 "sintatico.y"
         { 
             fprintf(yyout,"L%d\tNADA\n", ++rotulo);     // L de label 
             empilhar(rotulo);
         }
-#line 1587 "sintatico.c"
+#line 1590 "sintatico.c"
     break;
 
-  case 37:
-#line 246 "sintatico.y"
+  case 36:
+#line 251 "sintatico.y"
         { 
             int tip = desempilha();
             if (tip != LOG)
@@ -1595,22 +1598,22 @@ yyreduce:
             fprintf(yyout,"\tDSVF\tL%d\n", ++rotulo); 
             empilhar(rotulo);
         }
-#line 1599 "sintatico.c"
+#line 1602 "sintatico.c"
     break;
 
-  case 38:
-#line 255 "sintatico.y"
+  case 37:
+#line 260 "sintatico.y"
         { 
             int rot1 = desempilha();
             int rot2 = desempilha();
             fprintf(yyout,"\tDSVS\tL%d\n", rot2); 
             fprintf(yyout,"L%d\tNADA\n", rot1); 
         }
-#line 1610 "sintatico.c"
+#line 1613 "sintatico.c"
     break;
 
-  case 39:
-#line 265 "sintatico.y"
+  case 38:
+#line 270 "sintatico.y"
         { 
             int tip = desempilha();
             if (tip != LOG)
@@ -1618,40 +1621,40 @@ yyreduce:
             fprintf(yyout,"\tDSVF\tL%d\n", ++rotulo); 
             empilhar(rotulo);
         }
-#line 1622 "sintatico.c"
+#line 1625 "sintatico.c"
     break;
 
-  case 40:
-#line 273 "sintatico.y"
+  case 39:
+#line 278 "sintatico.y"
         { 
             int rot = desempilha();
             fprintf(yyout,"\tDSVS\tL%d\n", ++rotulo); 
             fprintf(yyout,"L%d\tNADA\n", rot); 
             empilhar(rotulo);
         }
-#line 1633 "sintatico.c"
+#line 1636 "sintatico.c"
     break;
 
-  case 41:
-#line 280 "sintatico.y"
+  case 40:
+#line 285 "sintatico.y"
         { 
             int rot = desempilha();
             fprintf(yyout,"L%d\tNADA\n", rot); 
         }
-#line 1642 "sintatico.c"
+#line 1645 "sintatico.c"
     break;
 
-  case 42:
-#line 288 "sintatico.y"
+  case 41:
+#line 293 "sintatico.y"
         {
             int pos = buscaSimbolo(atomo);
             empilhar(pos);
         }
-#line 1651 "sintatico.c"
+#line 1654 "sintatico.c"
     break;
 
-  case 43:
-#line 293 "sintatico.y"
+  case 42:
+#line 298 "sintatico.y"
         { 
             int tip = desempilha();
             int pos = desempilha();
@@ -1659,149 +1662,149 @@ yyreduce:
                 yyerror("Incompatibilidade de tipo!");
             fprintf(yyout,"\tARZG\t%d\n", tabSimb[pos].end); 
         }
-#line 1663 "sintatico.c"
+#line 1666 "sintatico.c"
     break;
 
-  case 44:
-#line 304 "sintatico.y"
+  case 43:
+#line 309 "sintatico.y"
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tMULT\n"); 
         }
-#line 1672 "sintatico.c"
+#line 1675 "sintatico.c"
     break;
 
-  case 45:
-#line 309 "sintatico.y"
+  case 44:
+#line 314 "sintatico.y"
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tDIVI\n"); 
         }
-#line 1681 "sintatico.c"
+#line 1684 "sintatico.c"
     break;
 
-  case 46:
-#line 314 "sintatico.y"
+  case 45:
+#line 319 "sintatico.y"
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tSOMA\n"); 
         }
-#line 1690 "sintatico.c"
+#line 1693 "sintatico.c"
     break;
 
-  case 47:
-#line 319 "sintatico.y"
+  case 46:
+#line 324 "sintatico.y"
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tSUBT\n"); 
         }
-#line 1699 "sintatico.c"
+#line 1702 "sintatico.c"
     break;
 
-  case 48:
-#line 324 "sintatico.y"
+  case 47:
+#line 329 "sintatico.y"
         { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMMA\n"); 
         }
-#line 1708 "sintatico.c"
+#line 1711 "sintatico.c"
     break;
 
-  case 49:
-#line 329 "sintatico.y"
+  case 48:
+#line 334 "sintatico.y"
         { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMME\n"); 
         }
-#line 1717 "sintatico.c"
+#line 1720 "sintatico.c"
     break;
 
-  case 50:
-#line 334 "sintatico.y"
+  case 49:
+#line 339 "sintatico.y"
         { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMIG\n"); 
         }
-#line 1726 "sintatico.c"
+#line 1729 "sintatico.c"
     break;
 
-  case 51:
-#line 339 "sintatico.y"
+  case 50:
+#line 344 "sintatico.y"
         { 
             testaTipo(LOG, LOG, LOG);
             fprintf(yyout,"\tCONJ\n"); 
         }
-#line 1735 "sintatico.c"
+#line 1738 "sintatico.c"
     break;
 
-  case 52:
-#line 344 "sintatico.y"
+  case 51:
+#line 349 "sintatico.y"
         { 
             testaTipo(LOG, LOG, LOG);
             fprintf(yyout,"\tDISJ\n"); 
         }
-#line 1744 "sintatico.c"
+#line 1747 "sintatico.c"
     break;
 
-  case 54:
-#line 355 "sintatico.y"
+  case 53:
+#line 360 "sintatico.y"
         {
             int pos = buscaSimbolo(atomo);
             fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
             empilhar(tabSimb[pos].tip);
             
         }
-#line 1755 "sintatico.c"
+#line 1758 "sintatico.c"
     break;
 
-  case 56:
-#line 366 "sintatico.y"
+  case 55:
+#line 371 "sintatico.y"
         {
             fprintf(yyout,"\tAMEM\t%d\n", 5); //TESTE
         }
-#line 1763 "sintatico.c"
+#line 1766 "sintatico.c"
     break;
 
   case 60:
-#line 386 "sintatico.y"
+#line 392 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t%s\n", atomo); 
             empilhar(INT);
         }
-#line 1772 "sintatico.c"
+#line 1775 "sintatico.c"
     break;
 
   case 61:
-#line 391 "sintatico.y"
+#line 397 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t1\n"); 
             empilhar(LOG);
         }
-#line 1781 "sintatico.c"
+#line 1784 "sintatico.c"
     break;
 
   case 62:
-#line 396 "sintatico.y"
+#line 402 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t0\n"); 
             empilhar(LOG);
         }
-#line 1790 "sintatico.c"
+#line 1793 "sintatico.c"
     break;
 
   case 63:
-#line 401 "sintatico.y"
+#line 407 "sintatico.y"
         { 
             int t = desempilha();
             if (t != LOG) yyerror ("Incompatibilidade de tipo!");       // Verificação se o termo é lógico
             fprintf(yyout,"\tNEGA\n"); 
             empilhar(LOG);
         }
-#line 1801 "sintatico.c"
+#line 1804 "sintatico.c"
     break;
 
 
-#line 1805 "sintatico.c"
+#line 1808 "sintatico.c"
 
       default: break;
     }
@@ -2033,7 +2036,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 410 "sintatico.y"
+#line 416 "sintatico.y"
 
 
 int main (int argc, char *argv[]) {

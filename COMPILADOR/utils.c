@@ -12,7 +12,7 @@ struct elemTabSimbolos {
     char id[100];       // identificador
     int end;            // endereço global ou deslocamento local
     int tip;            // tipo variável
-    char esc[1];        // escopo: 'g'=GLOBAL, 'l'=LOCAL
+    char esc;        // escopo: 'g'=GLOBAL, 'l'=LOCAL
     int rot;            // rotulo (especifico para funcao)
     char cat;           // categoria: 'f'=FUN, 'p'=PAR, 'v'=VAR
     int par[MAX_PAR];   // tipos dos parametros (funcao)
@@ -87,7 +87,7 @@ void mostraTabelaCompleta() {
     for (i = 0; i < 100; i++)
         printf("-");
     for (i = 0; i < posTab; i++)
-        printf("\n%3d | %30s | %3s | %3d | %3d | %3c | %3s | %3d | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, tabSimb[i].rot, tabSimb[i].cat,  printaTip(i), tabSimb[i].npa, 0/*tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
+        printf("\n%3d | %30s | %3c | %3d | %3d | %3c | %3s | %3d | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, tabSimb[i].rot, tabSimb[i].cat,  printaTip(i), tabSimb[i].npa, 0/*tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
     puts("\n");
 }
 
@@ -142,3 +142,21 @@ void testaTipo(int tipo1, int tipo2, int ret) {
         yyerror("Incompatibilidade de tipo!");
     empilhar(ret);
 }
+
+void ajustaParam(int posFunc, int nPar){    //parametros: # da função, e n parametros
+    for (int i = posFunc; i < TAM_TAB; i++)
+    {
+        if (tabSimb[i].esc == 'L') 
+        {
+            tabSimb[i].end = 0 - ( nPar + 2);
+        }
+        
+    } 
+}
+
+
+
+
+
+
+
