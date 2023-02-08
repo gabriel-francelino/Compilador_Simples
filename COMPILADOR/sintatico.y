@@ -129,6 +129,7 @@ lista_variaveis
         {  
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
+            elemTab.rot = -1;
             elemTab.tip = tipo;
             elemTab.cat = 'V';
             elemTab.esc = escopo;
@@ -139,6 +140,7 @@ lista_variaveis
         { 
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
+            elemTab.rot = -1;
             elemTab.tip = tipo;
             elemTab.cat = 'V';
             elemTab.esc = escopo;
@@ -184,6 +186,7 @@ funcao
         variaveis 
         T_INICIO lista_comandos T_FIMFUNC
         {
+            //posso verificar o se tem parametro criando uma var booleana que ativa quando encontra 'retorno'
             //remover_var_locais()
             //escopo = 'g'
             mostraTabelaCompleta();
@@ -200,8 +203,9 @@ parametro
         {
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
+            elemTab.rot = -1;
             elemTab.tip = tipo;
-            elemTab.cat = 'V';
+            elemTab.cat = 'P';
             elemTab.esc = escopo;
             insereSimbolo(elemTab);
             contaVar++;
@@ -228,7 +232,7 @@ comando
 retorno
     :   T_RETORNE expressao
         {
-            fprintf(yyout,"\tRTSP\t%d\n", 0); // RTSP n => onde n é numero de parametros
+            fprintf(yyout,"\tRTSP\t%d\n", npar); // RTSP n => onde n é numero de parametros
         }
       // deve gerar (depois da trad da expressao)
       // ARZL (valor de retorno), DMEM (se tiver variavel local)
@@ -315,7 +319,10 @@ atribuicao
             int pos = desempilha();
             if (tabSimb[pos].tip != tip)
                 yyerror("Incompatibilidade de tipo!");
-            fprintf(yyout,"\tARZG\t%d\n", tabSimb[pos].end); 
+            if (tabSimb[pos].esc == 'G')
+                fprintf(yyout,"\tARZG\t%d\n", tabSimb[pos].end); 
+            else
+                fprintf(yyout,"\tARZL\t%d\n", tabSimb[pos].end);
         }
     ;
 
@@ -373,10 +380,9 @@ expressao
 identificador
     :   T_IDENTIFICADOR
         {
-            int pos = buscaSimbolo(atomo);
-            fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
-            empilhar(tabSimb[pos].tip);
-            
+            // int pos = buscaSimbolo(atomo);  
+            // fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
+            // empilhar(tabSimb[pos].tip);
         }
     ;
 
@@ -384,6 +390,15 @@ chamada
     : // sem parametros eh uma variavel
         {
             //...
+            int pos = buscaSimbolo(atomo);
+            if(tabSimb[pos].esc == 'G'){
+                fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
+                empilhar(tabSimb[pos].tip);
+            }else{
+                fprintf(yyout,"\tCRVL\t%d\n", tabSimb[pos].end); 
+                empilhar(tabSimb[pos].tip);
+            }
+            
         }
     |   T_ABRE 
         {

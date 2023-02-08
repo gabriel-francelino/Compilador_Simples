@@ -3,8 +3,8 @@ programa TesteFunc
     logico b
     func inteiro soma2 ( inteiro x )
     inicio
-        a <- a + 2
-        retorne a
+        x <- x + 2
+        retorne x
     fimfunc
     /*func inteiro sub ( inteiro y )
     inicio
