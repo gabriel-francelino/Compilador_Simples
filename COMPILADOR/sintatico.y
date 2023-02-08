@@ -133,6 +133,7 @@ lista_variaveis
             elemTab.tip = tipo;
             elemTab.cat = 'V';
             elemTab.esc = escopo;
+            elemTab.npa = -1;
             insereSimbolo(elemTab);
             contaVar++;            
         }
@@ -144,6 +145,7 @@ lista_variaveis
             elemTab.tip = tipo;
             elemTab.cat = 'V';
             elemTab.esc = escopo;
+            elemTab.npa = -1;
             insereSimbolo(elemTab);
             contaVar++;               
         }
@@ -403,7 +405,7 @@ chamada
     |   T_ABRE 
         {
             //....
-            fprintf(yyout,"\tAMEM\t%d\n", 5); //TESTE
+            fprintf(yyout,"\tAMEM\t%d\n", 1); //TESTE
         }
         lista_argumentos 
         {

@@ -6,7 +6,8 @@ programa TesteFunc
         x <- x + 2
         retorne x
     fimfunc
-    /*func inteiro sub ( inteiro y )
+
+    /*func inteiro sub ( inteiro b )
     inicio
         retorne b - 2
     fimfunc*/
