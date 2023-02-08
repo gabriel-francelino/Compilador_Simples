@@ -1,12 +1,12 @@
 programa TesteFunc
     inteiro a
     logico b
-    func inteiro soma2 ( inteiro a )
+    func inteiro soma2 ( inteiro x )
     inicio
         a <- a + 2
         retorne a
     fimfunc
-    /*func inteiro sub ( inteiro b )
+    /*func inteiro sub ( inteiro y )
     inicio
         retorne b - 2
     fimfunc*/

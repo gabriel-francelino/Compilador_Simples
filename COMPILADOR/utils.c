@@ -12,11 +12,11 @@ struct elemTabSimbolos {
     char id[100];       // identificador
     int end;            // endereço global ou deslocamento local
     int tip;            // tipo variável
-    char esc;        // escopo: 'g'=GLOBAL, 'l'=LOCAL
+    char esc;           // escopo: 'g'=GLOBAL, 'l'=LOCAL
     int rot;            // rotulo (especifico para funcao)
     char cat;           // categoria: 'f'=FUN, 'p'=PAR, 'v'=VAR
     int par[MAX_PAR];   // tipos dos parametros (funcao)
-    // int *par;   // tipos dos parametros (funcao) outra alternativa
+    // int *par;        // tipos dos parametros (funcao) outra alternativa
     int npa;            // numero de parametros (funcao)
 } tabSimb[TAM_TAB], elemTab;
 
@@ -144,7 +144,7 @@ void testaTipo(int tipo1, int tipo2, int ret) {
 }
 
 void ajustaParam(int posFunc, int nPar){    //parametros: # da função, e n parametros
-    for (int i = posFunc; i < TAM_TAB; i++)
+    for (int i = posFunc; i < posFunc + nPar; i++)
     {
         if (tabSimb[i].esc == 'L') 
         {

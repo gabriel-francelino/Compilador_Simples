@@ -163,11 +163,13 @@ funcao
         tipo T_IDENTIFICADOR
         {
             strcpy(elemTab.id, atomo);
+            elemTab.esc = escopo;
             elemTab.end = contaVar;
-            elemTab.tip = tipo;
             elemTab.rot = ++rotulo;
             elemTab.cat = 'F';
-            elemTab.esc = escopo;
+            elemTab.tip = tipo;
+            
+            
             insereSimbolo(elemTab);
             contaVar++;
             fprintf(yyout,"L%d\tENSP\n", rotulo);     
@@ -175,9 +177,10 @@ funcao
             escopo = 'L';           
         }
         T_ABRE parametros T_FECHA
-        //{
+        {
+            
         //  ajustar_parametros(); depois de passar pelo fecha
-        //}
+        }
         variaveis 
         T_INICIO lista_comandos T_FIMFUNC
         {
@@ -192,7 +195,19 @@ parametros
     ;
 
 parametro
-    :   tipo T_IDENTIFICADOR
+    :   tipo 
+        T_IDENTIFICADOR
+        {
+            strcpy(elemTab.id, atomo);
+            elemTab.end = contaVar;
+            elemTab.tip = tipo;
+            elemTab.cat = 'V';
+            elemTab.esc = escopo;
+            insereSimbolo(elemTab);
+            contaVar++;
+            npar++;
+            printf("\n %d npar \n", npar);
+        }
         // {cadastrar o parametro}
     ;
 
@@ -367,11 +382,22 @@ identificador
 
 chamada
     : // sem parametros eh uma variavel
+        {
+            //...
+        }
     |   T_ABRE 
         {
+            //....
             fprintf(yyout,"\tAMEM\t%d\n", 5); //TESTE
         }
-        lista_argumentos T_FECHA
+        lista_argumentos 
+        {
+            //tratar depois de argumentos a pilha semantica
+        }
+        T_FECHA
+        {
+            //....
+        }
     ;
 
 lista_argumentos
