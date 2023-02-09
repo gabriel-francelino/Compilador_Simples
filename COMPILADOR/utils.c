@@ -143,15 +143,15 @@ void testaTipo(int tipo1, int tipo2, int ret) {
     empilhar(ret);
 }
 
-void ajustaParam(int posFunc, int nPar){    //parametros: # da função, e n parametros
-    for (int i = posFunc; i < posFunc + nPar; i++)
+void ajustaParam(int pos, int nPar){    //parametros: # da função, e n parametros
+    int endP = -3;
+    int posFunc = pos - nPar;
+    for (int i = pos; i >= posFunc; i--)
     {
-        if (tabSimb[i].esc == 'L') 
-        {
-            tabSimb[i].end = 0 - ( nPar + 2);
-        }
-        
+        tabSimb[i].end = endP; 
+        endP--;       
     } 
+    tabSimb[posFunc].npa = nPar;
 }
 
 

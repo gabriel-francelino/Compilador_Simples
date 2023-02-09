@@ -181,9 +181,10 @@ funcao
             escopo = 'L';           
         }
         T_ABRE parametros T_FECHA
-        {
-            
+        { 
         //  ajustar_parametros(); depois de passar pelo fecha
+            int pos = buscaSimbolo(atomo);
+            ajustaParam(pos, npar);
         }
         variaveis 
         T_INICIO lista_comandos T_FIMFUNC
