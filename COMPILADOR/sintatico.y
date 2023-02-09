@@ -415,6 +415,9 @@ chamada
         T_FECHA
         {
             //....
+            fprintf(yyout,"\tSVCP\n");
+            fprintf(yyout,"\tDSVS\tL%d\n", rotulo);
+            //duvida: precisa desempilhar?
         }
     ;
 

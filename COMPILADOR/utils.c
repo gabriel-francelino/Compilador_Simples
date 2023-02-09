@@ -85,9 +85,9 @@ char *escreveRot(int i){
 
 char *escreveNrPar(int i){
     static char str[3];
-    int rot = tabSimb[i].npa;
-    if(rot != -1){
-        sprintf(str, "L%d", rot);
+    int npa = tabSimb[i].npa;
+    if(npa != -1){
+        sprintf(str, "%d", npa);
         return str;
     }else{
         return "-";
@@ -115,7 +115,7 @@ void mostraTabelaCompleta() {
     for (i = 0; i < 100; i++)
         printf("-");
     for (i = 0; i < posTab; i++)
-        printf("\n%3d | %30s | %3c | %3d | %3s | %3c | %3s | %3d | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, escreveRot(i), tabSimb[i].cat,  escreveTip(i), tabSimb[i].npa, 0/*tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
+        printf("\n%3d | %30s | %3c | %3d | %3s | %3c | %3s | %3s | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, escreveRot(i), tabSimb[i].cat,  escreveTip(i), escreveNrPar(i), 0/*tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
     puts("\n");
 }
 

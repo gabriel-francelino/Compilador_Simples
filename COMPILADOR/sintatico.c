@@ -550,8 +550,8 @@ static const yytype_int16 yyrline[] =
      161,   199,   200,   204,   222,   223,   227,   228,   229,   230,
      231,   236,   246,   247,   251,   259,   268,   273,   267,   292,
      300,   291,   315,   314,   333,   338,   343,   348,   353,   358,
-     363,   368,   373,   378,   384,   394,   407,   412,   406,   422,
-     423,   427,   435,   440,   445,   450,   457
+     363,   368,   373,   378,   384,   394,   407,   412,   406,   425,
+     426,   430,   438,   443,   448,   453,   460
 };
 #endif
 
@@ -1830,50 +1830,53 @@ yyreduce:
 #line 416 "sintatico.y"
         {
             //....
+            fprintf(yyout,"\tSVCP\n");
+            fprintf(yyout,"\tDSVS\tL%d\n", rotulo);
+            //duvida: precisa desempilhar?
         }
-#line 1835 "sintatico.c"
+#line 1838 "sintatico.c"
     break;
 
   case 62:
-#line 436 "sintatico.y"
+#line 439 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t%s\n", atomo); 
             empilhar(INT);
         }
-#line 1844 "sintatico.c"
+#line 1847 "sintatico.c"
     break;
 
   case 63:
-#line 441 "sintatico.y"
+#line 444 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t1\n"); 
             empilhar(LOG);
         }
-#line 1853 "sintatico.c"
+#line 1856 "sintatico.c"
     break;
 
   case 64:
-#line 446 "sintatico.y"
+#line 449 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t0\n"); 
             empilhar(LOG);
         }
-#line 1862 "sintatico.c"
+#line 1865 "sintatico.c"
     break;
 
   case 65:
-#line 451 "sintatico.y"
+#line 454 "sintatico.y"
         { 
             int t = desempilha();
             if (t != LOG) yyerror ("Incompatibilidade de tipo!");       // Verificação se o termo é lógico
             fprintf(yyout,"\tNEGA\n"); 
             empilhar(LOG);
         }
-#line 1873 "sintatico.c"
+#line 1876 "sintatico.c"
     break;
 
 
-#line 1877 "sintatico.c"
+#line 1880 "sintatico.c"
 
       default: break;
     }
@@ -2105,7 +2108,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 460 "sintatico.y"
+#line 463 "sintatico.y"
 
 
 int main (int argc, char *argv[]) {
