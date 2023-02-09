@@ -1,6 +1,7 @@
 programa TesteFunc
     inteiro a
     logico b
+    
     func inteiro soma2 ( inteiro x )
     inicio
         x <- x + 2

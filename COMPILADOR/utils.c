@@ -50,7 +50,7 @@ void insereSimbolo (struct elemTabSimbolos elem) {
     // maiuscula(elem.id);       // para fazer diferenciação entre variáveis maiúsculas e minúsculas
     if (posTab == TAM_TAB)
         yyerror("Tabela de Simbolos Cheia!");
-    for (i = posTab - 1; strcmp(tabSimb[i].id, elem.id) && i >= 0; i--)
+    for (i = posTab - 1; (strcmp(tabSimb[i].id, elem.id) || tabSimb[i].esc != 'L' )&& i >= 0; i--)
         ;
     if (i != -1) {
         char msg[200];
