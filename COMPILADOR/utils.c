@@ -147,8 +147,19 @@ void mostraTabelaCompleta() {
 // Estrutura da Pilha Semântica
 // usada para endereços, variáveis, rótulos
 
+
+
+
 #define TAM_PIL 100
 int pilha[TAM_PIL];
+/*
+sugestao para depurar pilha - tem que mudar em todas as ocorrencias
+struct
+{
+    int valor;
+    char tipo; // r=rotulo, n=nvars, t=tipo, p=posicao
+}pilha[TAM_PILHA]
+*/
 int topo = -1;
 
 void empilhar (int valor) {
@@ -162,7 +173,22 @@ int desempilha() {
         yyerror("Pilha semântica vazia!");
     return pilha[topo--];
 }
+/*
+void empilhar (int valor, char tipo) {
+    if (topo == TAM_PIL)
+        yyerror ("Pilha semântica cheia!");
+    pilha[++topo].valor = valor;
+    pilha[topo].tipo = tipo;
+}
 
+int desempilha(char tipo) {
+    if (topo == -1) 
+        yyerror("Pilha semântica vazia!");
+    if ( pilha[topo].tipo != tipo)
+        yyerror("Desempilhamento ERRADO");    
+    return pilha[topo--].valor;
+}
+*/
 void testaTipo(int tipo1, int tipo2, int ret) {
     int t1 = desempilha();
     int t2 = desempilha();

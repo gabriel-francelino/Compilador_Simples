@@ -172,7 +172,7 @@ funcao
             elemTab.rot = ++rotulo;
             elemTab.cat = 'F';
             elemTab.tip = tipo;
-            
+            //precisa guardar a posicao que a funcao foi cadastrada na tabela de simbolos
             
             insereSimbolo(elemTab);
             contaVar++;
@@ -237,6 +237,11 @@ retorno
         {
             fprintf(yyout,"\tRTSP\t%d\n", npar); // RTSP n => onde n é numero de parametros
         }
+      // {verificar se esta no escopo local
+      //  verificar se o tipo da expressao é compativel com o tipo da funcao
+      //  ARZL x
+      //  DMEM x
+      //  RTSP x}
       // deve gerar (depois da trad da expressao)
       // ARZL (valor de retorno), DMEM (se tiver variavel local)
       // RTSP n 
