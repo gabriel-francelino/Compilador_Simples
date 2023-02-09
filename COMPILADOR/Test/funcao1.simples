@@ -7,10 +7,10 @@ programa TesteFunc
         retorne x
     fimfunc
 
-    /*func inteiro sub ( inteiro b )
+    func logico bool ( logico y )
     inicio
-        retorne b - 2
-    fimfunc*/
+        retorne y
+    fimfunc
 inicio
     a <- 10
     a <- soma2( a )

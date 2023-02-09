@@ -1523,7 +1523,7 @@ yyreduce:
 #line 162 "sintatico.y"
         {
             if(rotulo == 0)
-                fprintf(yyout,"\tDSVF\tL%d\n", rotulo); 
+                fprintf(yyout,"\tDSVS\tL%d\n", rotulo); 
             empilhar(rotulo);
         }
 #line 1530 "sintatico.c"
@@ -1562,9 +1562,9 @@ yyreduce:
   case 20:
 #line 191 "sintatico.y"
         {
-            //posso verificar o se tem parametro criando uma var booleana que ativa quando encontra 'retorno'
+            //posso verificar o se tem retorno criando uma var booleana que ativa quando encontra 'retorno'
             //remover_var_locais()
-            //escopo = 'g'
+            escopo = 'G';
             mostraTabelaCompleta();
         }
 #line 1571 "sintatico.c"

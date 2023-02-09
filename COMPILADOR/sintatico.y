@@ -161,7 +161,7 @@ funcao
     :   T_FUNC
         {
             if(rotulo == 0)
-                fprintf(yyout,"\tDSVF\tL%d\n", rotulo); 
+                fprintf(yyout,"\tDSVS\tL%d\n", rotulo); 
             empilhar(rotulo);
         } 
         tipo T_IDENTIFICADOR
@@ -189,9 +189,9 @@ funcao
         variaveis 
         T_INICIO lista_comandos T_FIMFUNC
         {
-            //posso verificar o se tem parametro criando uma var booleana que ativa quando encontra 'retorno'
+            //posso verificar o se tem retorno criando uma var booleana que ativa quando encontra 'retorno'
             //remover_var_locais()
-            //escopo = 'g'
+            escopo = 'G';
             mostraTabelaCompleta();
         } 
 
