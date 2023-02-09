@@ -151,29 +151,27 @@ void mostraTabelaCompleta() {
 
 
 #define TAM_PIL 100
-int pilha[TAM_PIL];
-/*
-sugestao para depurar pilha - tem que mudar em todas as ocorrencias
+//int pilha[TAM_PIL];
+//sugestao para depurar pilha - tem que mudar em todas as ocorrencias
 struct
 {
     int valor;
     char tipo; // r=rotulo, n=nvars, t=tipo, p=posicao
-}pilha[TAM_PILHA]
-*/
+} pilha[TAM_PIL];
 int topo = -1;
 
-void empilhar (int valor) {
-    if (topo == TAM_PIL)
-        yyerror ("Pilha semântica cheia!");
-    pilha[++topo] = valor;
-}
+// void empilhar (int valor) {
+//     if (topo == TAM_PIL)
+//         yyerror ("Pilha semântica cheia!");
+//     pilha[++topo] = valor;
+// }
 
-int desempilha() {
-    if (topo == -1) 
-        yyerror("Pilha semântica vazia!");
-    return pilha[topo--];
-}
-/*
+// int desempilha() {
+//     if (topo == -1) 
+//         yyerror("Pilha semântica vazia!");
+//     return pilha[topo--];
+// }
+
 void empilhar (int valor, char tipo) {
     if (topo == TAM_PIL)
         yyerror ("Pilha semântica cheia!");
@@ -184,17 +182,33 @@ void empilhar (int valor, char tipo) {
 int desempilha(char tipo) {
     if (topo == -1) 
         yyerror("Pilha semântica vazia!");
-    if ( pilha[topo].tipo != tipo)
-        yyerror("Desempilhamento ERRADO");    
+    if ( pilha[topo].tipo != tipo){
+        char msg[100];
+        sprintf(msg, "Desempilha espera [%c] e encontrou[%c]", tipo, pilha[topo].tipo);
+        yyerror(msg);    
+
+    }
     return pilha[topo--].valor;
 }
-*/
+
+void mostraPilha(){
+    int i = topo;
+    printf("Pilha = [");
+    while (i >=0)
+    {
+        printf("(%d,%c) ",pilha[i].valor, pilha[i].tipo);
+        i--;
+    }
+    printf("]\n");
+    
+}
+
 void testaTipo(int tipo1, int tipo2, int ret) {
-    int t1 = desempilha();
-    int t2 = desempilha();
+    int t1 = desempilha('t');
+    int t2 = desempilha('t');
     if (t1 != tipo1 || t2 != tipo2)
         yyerror("Incompatibilidade de tipo!");
-    empilhar(ret);
+    empilhar(ret, 't');
 }
 
 void ajustaParam(int pos, int nPar){    //parametros: # da função, e n parametros
