@@ -1,5 +1,9 @@
 // Estrutura da Tabela de Simbolos
 #include <ctype.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 #define TAM_TAB 100
 #define MAX_PAR 20
 enum 
@@ -64,20 +68,44 @@ void insereSimbolo (struct elemTabSimbolos elem) {
 
 //modificar a rptina mostraTabela para apresentar os outros 
 //campos (esc, rot, cat, ...) da tabela
-char *printaTip(int i){
+char *escreveTip(int i){
     return tabSimb[i].tip == INT? "INT" : "LOG";
 }
 
-void mostraTabela() {
-    puts("Tabela de Simbolos");
-    puts("------------------");
-    printf("%30s | %s | %s \n", "ID", "END", "TIP");
-    for (int i = 0; i < 50; i++)
-        printf("-");
-    for (int i = 0; i < posTab; i++)
-        printf("\n%30s | %3d | %s", tabSimb[i].id, tabSimb[i].end, tabSimb[i].tip == INT? "INT" : "LOG");
-    printf("\n");
+char *escreveRot(int i){
+    static char str[3];
+    int rot = tabSimb[i].rot;
+    if(rot != -1){
+        sprintf(str, "L%d", rot);
+        return str;
+    }else{
+        return "-";
+    } 
 }
+
+char *escreveNrPar(int i){
+    static char str[3];
+    int rot = tabSimb[i].npa;
+    if(rot != -1){
+        sprintf(str, "L%d", rot);
+        return str;
+    }else{
+        return "-";
+    } 
+}
+
+//char *printa
+
+// void mostraTabela() {
+//     puts("Tabela de Simbolos");
+//     puts("------------------");
+//     printf("%30s | %s | %s \n", "ID", "END", "TIP");
+//     for (int i = 0; i < 50; i++)
+//         printf("-");
+//     for (int i = 0; i < posTab; i++)
+//         printf("\n%30s | %3d | %s", tabSimb[i].id, tabSimb[i].end, tabSimb[i].tip == INT? "INT" : "LOG");
+//     printf("\n");
+// }
 
 /*  TABELA DE SIMBOLOS COMPLETA */
 void mostraTabelaCompleta() {
@@ -87,7 +115,7 @@ void mostraTabelaCompleta() {
     for (i = 0; i < 100; i++)
         printf("-");
     for (i = 0; i < posTab; i++)
-        printf("\n%3d | %30s | %3c | %3d | %3d | %3c | %3s | %3d | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, tabSimb[i].rot, tabSimb[i].cat,  printaTip(i), tabSimb[i].npa, 0/*tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
+        printf("\n%3d | %30s | %3c | %3d | %3s | %3c | %3s | %3d | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, escreveRot(i), tabSimb[i].cat,  escreveTip(i), tabSimb[i].npa, 0/*tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
     puts("\n");
 }
 
