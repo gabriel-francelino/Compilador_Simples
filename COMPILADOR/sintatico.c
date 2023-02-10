@@ -551,8 +551,8 @@ static const yytype_int16 yyrline[] =
      240,   241,   242,   243,   248,   263,   264,   268,   276,   285,
      290,   284,   309,   317,   308,   332,   331,   350,   355,   360,
      365,   370,   375,   380,   385,   390,   395,   401,   413,   423,
-     428,   422,   448,   450,   449,   458,   466,   471,   476,   481,
-     488
+     428,   422,   449,   451,   450,   459,   467,   472,   477,   482,
+     489
 };
 #endif
 
@@ -1841,7 +1841,7 @@ yyreduce:
 #line 428 "sintatico.y"
         {
             //tratar depois de argumentos a pilha semantica
-            mostraPilha();
+            
         }
 #line 1847 "sintatico.c"
     break;
@@ -1858,60 +1858,61 @@ yyreduce:
             fprintf(yyout,"\tSVCP\n");
             fprintf(yyout,"\tDSVS\tL%d\n", tabSimb[pos].rot);
             empilhar(tabSimb[pos].tip, 't');
+            mostraPilha();
             
         }
-#line 1864 "sintatico.c"
+#line 1865 "sintatico.c"
     break;
 
   case 63:
-#line 450 "sintatico.y"
+#line 451 "sintatico.y"
         {
             //a partir de cada expressao desempilha tipo
             desempilha('t');
         }
-#line 1873 "sintatico.c"
+#line 1874 "sintatico.c"
     break;
 
   case 66:
-#line 467 "sintatico.y"
+#line 468 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t%s\n", atomo); 
             empilhar(INT,'t');
         }
-#line 1882 "sintatico.c"
+#line 1883 "sintatico.c"
     break;
 
   case 67:
-#line 472 "sintatico.y"
+#line 473 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t1\n"); 
             empilhar(LOG, 't');
         }
-#line 1891 "sintatico.c"
+#line 1892 "sintatico.c"
     break;
 
   case 68:
-#line 477 "sintatico.y"
+#line 478 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t0\n"); 
             empilhar(LOG, 't');
         }
-#line 1900 "sintatico.c"
+#line 1901 "sintatico.c"
     break;
 
   case 69:
-#line 482 "sintatico.y"
+#line 483 "sintatico.y"
         { 
             int t = desempilha('t');
             if (t != LOG) yyerror ("Incompatibilidade de tipo!");       // Verificação se o termo é lógico
             fprintf(yyout,"\tNEGA\n"); 
             empilhar(LOG, 't');
         }
-#line 1911 "sintatico.c"
+#line 1912 "sintatico.c"
     break;
 
 
-#line 1915 "sintatico.c"
+#line 1916 "sintatico.c"
 
       default: break;
     }
@@ -2143,7 +2144,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 491 "sintatico.y"
+#line 492 "sintatico.y"
 
 
 int main (int argc, char *argv[]) {

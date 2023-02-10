@@ -1,12 +1,12 @@
 programa t1
-    func inteiro maior ( inteiro a inteiro b )
+    /*func inteiro maior ( inteiro a inteiro b )
     inicio
         se a > b entao
             retorne a 
         senao 
             retorne b
         fimse
-    fimfunc
+    fimfunc*/
 inicio
-    escreva maior ( 10 20 )
+    //escreva maior ( 10 20 )
 fimprograma

@@ -427,7 +427,7 @@ chamada
         lista_argumentos 
         {
             //tratar depois de argumentos a pilha semantica
-            mostraPilha();
+            
         }
         T_FECHA
         {
@@ -440,6 +440,7 @@ chamada
             fprintf(yyout,"\tSVCP\n");
             fprintf(yyout,"\tDSVS\tL%d\n", tabSimb[pos].rot);
             empilhar(tabSimb[pos].tip, 't');
+            mostraPilha();
             
         }
     ;
