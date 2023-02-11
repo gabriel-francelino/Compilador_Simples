@@ -77,17 +77,17 @@ programa
         }
         // acrescentar as funcoes
         rotinas 
+        /* variaveis //variaveis locais
+        {
+            mostraTabela();
+            empilhar(contaVarL); 
+            if (contaVarL) 
+                fprintf(yyout,"\tAMEM\t%d\n", contaVarL); 
+        } */
         T_INICIO
         {
             escopo = 'L';
         }   
-        /*variaveis //variaveis locais
-        {
-            mostraTabela();
-            empilhar(contaVar); 
-            if (contaVar) 
-                fprintf(yyout,"\tAMEM\t%d\n", contaVar); 
-        }*/
         lista_comandos T_FIM
         { 
             int conta = desempilha('n');
@@ -125,26 +125,37 @@ lista_variaveis
     :   lista_variaveis T_IDENTIFICADOR 
         {  
             strcpy(elemTab.id, atomo);
-            elemTab.end = contaVar;
+            if(escopo == 'G'){
+                elemTab.end = contaVar;
+                contaVar++;
+            }else{
+                elemTab.end = contaVarL;
+                contaVarL++;
+            }
             elemTab.rot = -1;
             elemTab.tip = tipo;
             elemTab.cat = 'V';
             elemTab.esc = escopo;
             elemTab.npa = -1;
             insereSimbolo(elemTab);
-            contaVar++;            
+                        
         }
     |   T_IDENTIFICADOR
         { 
             strcpy(elemTab.id, atomo);
-            elemTab.end = contaVar;
+             if(escopo == 'G'){
+                elemTab.end = contaVar;
+                contaVar++;
+            }else{
+                elemTab.end = contaVarL;
+                contaVarL++;
+            }
             elemTab.rot = -1;
             elemTab.tip = tipo;
             elemTab.cat = 'V';
             elemTab.esc = escopo;
             elemTab.npa = -1;
-            insereSimbolo(elemTab);
-            contaVar++;               
+            insereSimbolo(elemTab);               
         }
     ;
 
@@ -196,6 +207,12 @@ funcao
             ajustaParam(pos, npar);
         }
         variaveis 
+        {
+            mostraTabelaCompleta();
+            empilhar(contaVarL, 'n'); 
+            if (contaVarL) 
+                fprintf(yyout,"\tAMEM\t%d\n", contaVarL); 
+        } 
         T_INICIO lista_comandos T_FIMFUNC
         {
             //posso verificar o se tem retorno criando uma var booleana que ativa quando encontra 'retorno'
@@ -252,6 +269,9 @@ retorno
                 fprintf(yyout,"\tARZG\t%d\n", tabSimb[pos].end); 
             else
                 fprintf(yyout,"\tARZL\t%d\n", tabSimb[pos].end);
+            // int contaL = desempilha('n');
+            // if (contaL)
+            //     fprintf(yyout, "\tDMEM\t%d\n", contaL);
             fprintf(yyout,"\tRTSP\t%d\n", npar); // RTSP n => onde n é numero de parametros
         }
       // {verificar se esta no escopo local
@@ -429,11 +449,7 @@ chamada
             //....
             fprintf(yyout,"\tAMEM\t%d\n", 1); //TESTE
         }
-        lista_argumentos 
-        {
-            //tratar depois de argumentos a pilha semantica
-            
-        }
+        lista_argumentos //tratar depois de argumentos a pilha semantica
         T_FECHA
         {
             //....

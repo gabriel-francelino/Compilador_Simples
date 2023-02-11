@@ -1,0 +1,11 @@
+programa teste
+    inteiro i j k
+    func inteiro f ( inteiro a logico b)
+    inteiro x y z
+    inicio
+        x <- 10 + a
+        retorne x
+    fimfunc
+inicio
+    
+fimprograma

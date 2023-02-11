@@ -1,4 +1,4 @@
-programa t1
+programa teste1
     func inteiro maior ( inteiro a inteiro b )
     inicio
         se a > b entao
