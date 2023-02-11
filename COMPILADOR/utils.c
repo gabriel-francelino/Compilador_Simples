@@ -61,6 +61,23 @@ void insereSimbolo (struct elemTabSimbolos elem) {
 
 }
 
+void removeSimbolos(int npar){
+    int i, j;
+    int n = posTab;
+    int pUpar = posTab - npar + 1;  // posicao ultimo parametro
+    if(posTab == 0)
+        yyerror("Tabela de Simbolos Vazia!");
+    for(i = pUpar; i < n; i++){
+        if(tabSimb[i].cat == 'P'){
+            for(j = i; j < n - 1; j++){
+                tabSimb[j] = tabSimb[j+1];
+            }
+            n--;
+            i--;
+        }
+    }
+}
+
 //sugestão :
 //desenvolver uma rotina para ajustar o endereço dos parametros
 //na tabela de simbolos e o vetor de parametros da funcao

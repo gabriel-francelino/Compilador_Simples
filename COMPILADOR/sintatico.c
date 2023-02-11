@@ -1637,7 +1637,7 @@ yyreduce:
                 fprintf(yyout,"\tARZG\t%d\n", tabSimb[pos].end); 
             else
                 fprintf(yyout,"\tARZL\t%d\n", tabSimb[pos].end);
-            // int contaL = desempilha('n');
+            // int contaL = desempilha('n');    //DMEM n para as variaveis locais
             // if (contaL)
             //     fprintf(yyout, "\tDMEM\t%d\n", contaL);
             fprintf(yyout,"\tRTSP\t%d\n", npar); // RTSP n => onde n é numero de parametros
