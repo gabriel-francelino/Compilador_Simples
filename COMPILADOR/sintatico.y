@@ -79,10 +79,7 @@ programa
         rotinas 
         T_INICIO
         {
-            // if(rotulo != 0){    //só quando encontrar a primeira função que vai desviar para o LO NADA
-            //     int rot = desempilha('r');
-            //     fprintf(yyout,"L%d\tNADA\n", rot);
-            // }   
+            escopo = 'L';
         }   
         /*variaveis //variaveis locais
         {
@@ -190,7 +187,7 @@ funcao
             fprintf(yyout,"L%d\tENSP\n", rotulo);     
             //empilhar(rotulo,'r');
             escopo = 'L';  
-            mostraPilha();         
+            //mostraPilha();         
         }
         T_ABRE parametros T_FECHA
         { 
@@ -225,7 +222,7 @@ parametro
             insereSimbolo(elemTab);
             contaVar++;
             npar++;
-            printf("\n %d npar \n", npar);
+            //printf("\n %d npar \n", npar);
         }
         // {cadastrar o parametro}
     ;
@@ -247,6 +244,14 @@ comando
 retorno
     :   T_RETORNE expressao
         {
+            int tip = desempilha('t');
+            int pos = buscaSimbolo(atomo);
+            if (tabSimb[pos].tip != tip)
+                yyerror("Incompatibilidade de tipo!");
+            if (tabSimb[pos].esc == 'G')
+                fprintf(yyout,"\tARZG\t%d\n", tabSimb[pos].end); 
+            else
+                fprintf(yyout,"\tARZL\t%d\n", tabSimb[pos].end);
             fprintf(yyout,"\tRTSP\t%d\n", npar); // RTSP n => onde n é numero de parametros
         }
       // {verificar se esta no escopo local
@@ -435,12 +440,11 @@ chamada
             // fprintf(yyout,"\tSVCP\n");
             // fprintf(yyout,"\tDSVS\tL%d\n", rotulo);
             //duvida: precisa desempilhar?
-
             int pos = desempilha('p');
             fprintf(yyout,"\tSVCP\n");
             fprintf(yyout,"\tDSVS\tL%d\n", tabSimb[pos].rot);
             empilhar(tabSimb[pos].tip, 't');
-            mostraPilha();
+            //mostraPilha();
             
         }
     ;
