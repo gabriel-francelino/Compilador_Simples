@@ -61,24 +61,22 @@ void insereSimbolo (struct elemTabSimbolos elem) {
 
 }
 
-void removeParametros(int npar){
+void removeSimbolosLocais(int posFunc, int nLoc){
     int i, j;
     int n = posTab;
-    int pPar = posTab - npar + 1;  // posicao primeiro parametro
     if(posTab == 0)
         yyerror("Tabela de Simbolos Vazia!");
-    for(i = pPar; i < n; i++){
-        printf("categoria %c\n", tabSimb[i].cat);
-        if(tabSimb[i].cat == 'P'){
+    for(i = posFunc+1; i < n; i++){
+        if(tabSimb[i].esc == 'L'){
             for(j = i; j < n - 1; j++){
-                tabSimb[j] = tabSimb[j+npar];
-                puts("Removendo..");
+                tabSimb[j] = tabSimb[j+nLoc];
+                puts("Removendo..\n");
             }
             n--;
             i--;
         }
     }
-    posTab -= npar;
+    posTab -= nLoc;
 }
 
 //sugestão :
