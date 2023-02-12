@@ -221,6 +221,9 @@ funcao
         {
             //posso verificar o se tem retorno criando uma var booleana que ativa quando encontra 'retorno'
             //remover_var_locais()
+            if(!verificaRetorno)
+                yyerror("Esperado comando de retorno!");
+            verificaRetorno = 0;
             int contaL = desempilha('n');    //DMEM n para as variaveis locais
             if (contaL)
                 fprintf(yyout, "\tDMEM\t%d\n", contaL);
@@ -277,12 +280,8 @@ retorno
             if (tabSimb[posFunc].tip != tip)
                 yyerror("Incompatibilidade de tipo!");
             fprintf(yyout,"\tARZL\t%d\n", tabSimb[posFunc].end);
-            // if (tabSimb[pos-1].esc == 'G')
-            //     fprintf(yyout,"\tARZG\t%d\n", tabSimb[pos-1].end); 
-            // else
-               
-            
             fprintf(yyout,"\tRTSP\t%d\n", npar); // RTSP n => onde n é numero de parametros
+            verificaRetorno = 1;
         }
       // {verificar se esta no escopo local
       //  verificar se o tipo da expressao é compativel com o tipo da funcao
