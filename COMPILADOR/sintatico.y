@@ -193,8 +193,10 @@ funcao
             elemTab.cat = 'F';
             elemTab.tip = tipo;
             //precisa guardar a posicao que a funcao foi cadastrada na tabela de simbolos
-            
             insereSimbolo(elemTab);
+            //int pos = buscaSimbolo(atomo);
+            //empilhar(pos, 'p');
+
             contaVar++;
             fprintf(yyout,"L%d\tENSP\n", rotulo);     
             //empilhar(rotulo,'r');
@@ -264,14 +266,17 @@ comando
 retorno
     :   T_RETORNE expressao
         {
+            mostraPilha();
             int tip = desempilha('t');
             int pos = buscaSimbolo(atomo);
             if (tabSimb[pos].tip != tip)
                 yyerror("Incompatibilidade de tipo!");
-            if (tabSimb[pos].esc == 'G')
-                fprintf(yyout,"\tARZG\t%d\n", tabSimb[pos].end); 
-            else
-                fprintf(yyout,"\tARZL\t%d\n", tabSimb[pos].end);
+            printf("posicao: %d\n", pos);
+            fprintf(yyout,"\tARZL\t%d\n", tabSimb[pos].end);
+            // if (tabSimb[pos-1].esc == 'G')
+            //     fprintf(yyout,"\tARZG\t%d\n", tabSimb[pos-1].end); 
+            // else
+               
             // int contaL = desempilha('n');    //DMEM n para as variaveis locais
             // if (contaL)
             //     fprintf(yyout, "\tDMEM\t%d\n", contaL);
