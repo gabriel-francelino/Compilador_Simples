@@ -86,6 +86,7 @@ programa
         } */
         T_INICIO
         {
+            mostraTabelaCompleta();
             escopo = 'L';
         }   
         lista_comandos T_FIM
@@ -218,6 +219,8 @@ funcao
             //posso verificar o se tem retorno criando uma var booleana que ativa quando encontra 'retorno'
             //remover_var_locais()
             escopo = 'G';
+            removeParametros(npar);
+            npar = 0;
             mostraTabelaCompleta();
         } 
 
