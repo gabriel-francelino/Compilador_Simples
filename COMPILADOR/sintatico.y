@@ -13,6 +13,7 @@ int tipo;
 char escopo;
 int npar = 0;
 int posFunc;
+int verificaRetorno = 0;
 %}
 
 %token T_PROGRAMA
@@ -179,12 +180,7 @@ funcoes
     ;
 
 funcao  
-    :   T_FUNC
-        {
-            // if(rotulo == 0)
-            //     fprintf(yyout,"\tDSVS\tL%d\n", rotulo); 
-            // //empilhar(rotulo,'r');
-        } 
+    :   T_FUNC 
         tipo T_IDENTIFICADOR
         {
             strcpy(elemTab.id, atomo);
