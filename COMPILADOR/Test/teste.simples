@@ -1,5 +1,6 @@
 programa teste
     inteiro i j k
+    //logico i
     func inteiro f ( inteiro a logico b inteiro c inteiro d )
     inteiro x y z
     inicio
@@ -7,6 +8,6 @@ programa teste
         retorne x + 2
     fimfunc
 inicio
-    i <- f ( 10 V 20 30 )
+    i <- f ( 10 V 20 (30 + 2) )
     escreva i
 fimprograma
