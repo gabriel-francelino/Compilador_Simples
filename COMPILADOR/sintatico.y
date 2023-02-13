@@ -14,6 +14,7 @@ char escopo;
 int npar = 0;
 int posFunc;
 int verificaRetorno = 0;
+int verTipoPar = 0;
 %}
 
 %token T_PROGRAMA
@@ -463,6 +464,9 @@ chamada
             fprintf(yyout,"\tAMEM\t%d\n", 1); //TESTE
         }
         lista_argumentos //tratar depois de argumentos a pilha semantica
+        {
+            verTipoPar = 0;
+        }
         T_FECHA
         {
             //....
@@ -483,7 +487,10 @@ lista_argumentos
     |   expressao
         {
             //a partir de cada expressao desempilha tipo
-            desempilha('t');
+            int t = desempilha('t');
+            if(tabSimb[posFunc].par[verTipoPar] != t)
+                yyerror("Incompatibilidade no tipo dos parametros.");
+            verTipoPar++;
         }
         lista_argumentos
     ;
