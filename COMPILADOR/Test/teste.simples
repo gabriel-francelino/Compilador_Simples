@@ -1,11 +1,12 @@
 programa teste
     inteiro i j k
-    func inteiro f ( inteiro a logico b inteiro c inteiro d logico h logico s inteiro m)
+    func inteiro f ( inteiro a logico b inteiro c inteiro d )
     inteiro x y z
     inicio
         x <- 10 + a
         retorne x
     fimfunc
 inicio
-    
+    i <- f ( 10 V 20 30 )
+    escreva i
 fimprograma
