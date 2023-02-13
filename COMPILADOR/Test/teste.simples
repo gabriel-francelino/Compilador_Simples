@@ -4,7 +4,7 @@ programa teste
     inteiro x y z
     inicio
         x <- 10 + a
-        retorne x
+        retorne x + 2
     fimfunc
 inicio
     i <- f ( 10 V 20 30 )
