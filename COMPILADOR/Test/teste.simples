@@ -1,6 +1,6 @@
 programa teste
     inteiro i j k
-    func inteiro f ( inteiro a logico b inteiro c inteiro d )
+    func inteiro f ( inteiro a logico b inteiro c inteiro d logico h logico s inteiro m)
     inteiro x y z
     inicio
         x <- 10 + a
