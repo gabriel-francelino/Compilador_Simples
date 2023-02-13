@@ -209,7 +209,7 @@ funcao
         variaveis 
         {
             mostraTabelaCompleta();
-            empilhar(contaVarL, 'n'); 
+            //empilhar(contaVarL, 'n'); //acho que pode fazer uma condição para testar
             if (contaVarL) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVarL); 
         } 
@@ -224,9 +224,9 @@ funcao
             if(!verificaRetorno)
                 yyerror("Esperado comando de retorno!");
             verificaRetorno = 0;
-            int contaL = desempilha('n');    //DMEM n para as variaveis locais
-            if (contaL)
-                fprintf(yyout, "\tDMEM\t%d\n", contaL);
+            // int contaL = desempilha('n');    //DMEM n para as variaveis locais
+            // if (contaL)
+            //     fprintf(yyout, "\tDMEM\t%d\n", contaL);
 
             escopo = 'G';
             removeSimbolosLocais(posFunc, npar+contaVarL);
@@ -280,6 +280,8 @@ retorno
             if (tabSimb[posFunc].tip != tip)
                 yyerror("Incompatibilidade de tipo!");
             fprintf(yyout,"\tARZL\t%d\n", tabSimb[posFunc].end);
+            if (contaVarL)
+                fprintf(yyout, "\tDMEM\t%d\n", contaVarL); 
             fprintf(yyout,"\tRTSP\t%d\n", npar); // RTSP n => onde n é numero de parametros
             verificaRetorno = 1;
         }

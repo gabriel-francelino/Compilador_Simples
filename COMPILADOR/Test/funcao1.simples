@@ -15,5 +15,7 @@ programa TesteFunc
 inicio
     a <- 10
     a <- soma2( a )
+    b <- bool ( V )
     escreva a
+    escreva b
 fimprograma
