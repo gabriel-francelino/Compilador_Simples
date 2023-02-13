@@ -132,8 +132,23 @@ void mostraTabelaCompleta() {
     printf("\n%3c | %30s | %s | %s | %s | %s | %s | %s | %s\n",'#', "ID", "ESC", "DSL", "ROT", "CAT", "TIP", "NPA", "PAR");
     for (i = 0; i < 100; i++)
         printf("-");
-    for (i = 0; i < posTab; i++)
-        printf("\n%3d | %30s | %3c | %3d | %3s | %3c | %3s | %3s | %6d\n", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, escreveRot(i), tabSimb[i].cat,  escreveTip(i), escreveNrPar(i), 0/*tabSimb[i].par[i]/*precisa mudar a apresentação do parametro*/);
+    
+    for (i = 0; i < posTab; i++){
+        printf("\n%3d | %30s | %3c | %3d | %3s | %3c | %3s | %3s |", i, tabSimb[i].id, tabSimb[i].esc, tabSimb[i].end, escreveRot(i), tabSimb[i].cat,  escreveTip(i), escreveNrPar(i));
+        if(tabSimb[i].cat == 'F'){
+            printf(" [");
+            for(int j = 0; j < tabSimb[i].npa; j++){
+                if(tabSimb[i].par[j] == INT){
+                    printf(" INT ");
+                }else{
+                    printf(" LOG ");
+                }
+            }
+            printf("] ");
+        }else{
+            puts(" - ");
+        }
+    }
     puts("\n");
 }
 
