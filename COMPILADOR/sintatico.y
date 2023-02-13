@@ -250,6 +250,7 @@ parametro
             elemTab.cat = 'P';
             elemTab.esc = escopo;
             insereSimbolo(elemTab);
+            tabSimb[posFunc].par[npar] = tipo;
             contaVar++;
             npar++;
             //printf("\n %d npar \n", npar);
@@ -303,6 +304,7 @@ entrada_saida
 leitura 
     :   T_LEIA T_IDENTIFICADOR
         { 
+            //comparar se é local
             int pos = buscaSimbolo(atomo);         
             fprintf(yyout,"\tLEIA\n\tARZG\t%d\n", tabSimb[pos].end); 
         }
