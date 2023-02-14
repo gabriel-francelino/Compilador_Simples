@@ -9,7 +9,7 @@ programa teste
         retorne i
     fimfunc
 
-    func inteiro f ()
+    func inteiro f ( inteiro d logico c)
     inicio
         i <- 10
         retorne i
@@ -22,7 +22,7 @@ programa teste
     fimfunc
 
 inicio
-    escreva f()
-    escreva f1()
-    escreva f0()
+    escreva f(1 V 3)
+    //escreva f1()
+    //escreva f0()
 fimprograma

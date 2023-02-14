@@ -84,8 +84,9 @@ int npar = 0;
 int posFunc;
 int verificaRetorno = 0;
 int verTipoPar = 0;
+int qArgs = 0;
 
-#line 89 "sintatico.c"
+#line 90 "sintatico.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -548,14 +549,14 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    69,    69,    75,    91,    68,   105,   110,   111,   116,
-     117,   122,   124,   129,   147,   167,   168,   168,   179,   180,
-     186,   205,   211,   218,   184,   240,   241,   245,   264,   265,
-     269,   270,   271,   272,   273,   278,   302,   303,   307,   316,
-     325,   330,   324,   349,   357,   348,   372,   371,   390,   395,
-     400,   405,   410,   415,   420,   425,   430,   435,   441,   453,
-     463,   470,   462,   489,   491,   490,   502,   510,   515,   520,
-     525,   532
+       0,    70,    70,    76,    92,    69,   106,   111,   112,   117,
+     118,   123,   125,   130,   148,   168,   169,   169,   180,   181,
+     187,   206,   212,   219,   185,   241,   242,   246,   265,   266,
+     270,   271,   272,   273,   274,   279,   303,   304,   308,   317,
+     326,   331,   325,   350,   358,   349,   373,   372,   391,   396,
+     401,   406,   411,   416,   421,   426,   431,   436,   442,   454,
+     464,   471,   463,   496,   498,   497,   511,   519,   524,   529,
+     534,   541
 };
 #endif
 
@@ -1433,66 +1434,66 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 69 "sintatico.y"
+#line 70 "sintatico.y"
         { 
             contaVar = 0; 
             contaVarL = 0;  //conta variaveis locais - teste
             escopo = 'G';
         }
-#line 1443 "sintatico.c"
+#line 1444 "sintatico.c"
     break;
 
   case 3:
-#line 75 "sintatico.y"
+#line 76 "sintatico.y"
         {
             mostraTabelaCompleta();
             empilhar(contaVar, 'n'); 
             if (contaVar) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVar); 
         }
-#line 1454 "sintatico.c"
+#line 1455 "sintatico.c"
     break;
 
   case 4:
-#line 91 "sintatico.y"
+#line 92 "sintatico.y"
         {
             mostraTabelaCompleta();
             escopo = 'L';
         }
-#line 1463 "sintatico.c"
+#line 1464 "sintatico.c"
     break;
 
   case 5:
-#line 96 "sintatico.y"
+#line 97 "sintatico.y"
         { 
             int conta = desempilha('n');
             if (conta)
                 fprintf(yyout, "\tDMEM\t%d\n", conta); 
             fprintf(yyout, "\tFIMP\n");
         }
-#line 1474 "sintatico.c"
+#line 1475 "sintatico.c"
     break;
 
   case 6:
-#line 106 "sintatico.y"
+#line 107 "sintatico.y"
         { fprintf(yyout,"\tINPP\n"); }
-#line 1480 "sintatico.c"
+#line 1481 "sintatico.c"
     break;
 
   case 11:
-#line 123 "sintatico.y"
+#line 124 "sintatico.y"
         { tipo = LOG; }
-#line 1486 "sintatico.c"
+#line 1487 "sintatico.c"
     break;
 
   case 12:
-#line 125 "sintatico.y"
+#line 126 "sintatico.y"
         { tipo = INT; }
-#line 1492 "sintatico.c"
+#line 1493 "sintatico.c"
     break;
 
   case 13:
-#line 130 "sintatico.y"
+#line 131 "sintatico.y"
         {  
             strcpy(elemTab.id, atomo);
             if(escopo == 'G'){
@@ -1510,11 +1511,11 @@ yyreduce:
             insereSimbolo(elemTab);
                         
         }
-#line 1514 "sintatico.c"
+#line 1515 "sintatico.c"
     break;
 
   case 14:
-#line 148 "sintatico.y"
+#line 149 "sintatico.y"
         { 
             strcpy(elemTab.id, atomo);
              if(escopo == 'G'){
@@ -1531,27 +1532,27 @@ yyreduce:
             elemTab.npa = -1;
             insereSimbolo(elemTab);               
         }
-#line 1535 "sintatico.c"
+#line 1536 "sintatico.c"
     break;
 
   case 16:
-#line 168 "sintatico.y"
+#line 169 "sintatico.y"
         {
             fprintf(yyout, "\tDSVS\tL0\n");
         }
-#line 1543 "sintatico.c"
+#line 1544 "sintatico.c"
     break;
 
   case 17:
-#line 172 "sintatico.y"
+#line 173 "sintatico.y"
         {
             fprintf(yyout, "L0\tNADA\n");
         }
-#line 1551 "sintatico.c"
+#line 1552 "sintatico.c"
     break;
 
   case 20:
-#line 186 "sintatico.y"
+#line 187 "sintatico.y"
         {
             strcpy(elemTab.id, atomo);
             elemTab.esc = escopo;
@@ -1570,40 +1571,40 @@ yyreduce:
             escopo = 'L';  
             //mostraPilha();         
         }
-#line 1574 "sintatico.c"
+#line 1575 "sintatico.c"
     break;
 
   case 21:
-#line 205 "sintatico.y"
+#line 206 "sintatico.y"
         { 
         //  ajustar_parametros(); depois de passar pelo fecha
             int pos = buscaSimbolo(atomo);
             ajustaParam(pos, npar);
         }
-#line 1584 "sintatico.c"
+#line 1585 "sintatico.c"
     break;
 
   case 22:
-#line 211 "sintatico.y"
+#line 212 "sintatico.y"
         {
             mostraTabelaCompleta();
             //empilhar(contaVarL, 'n'); //acho que pode fazer uma condição para testar
             if (contaVarL) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVarL); 
         }
-#line 1595 "sintatico.c"
+#line 1596 "sintatico.c"
     break;
 
   case 23:
-#line 218 "sintatico.y"
+#line 219 "sintatico.y"
         {
             mostraTabelaCompleta();
         }
-#line 1603 "sintatico.c"
+#line 1604 "sintatico.c"
     break;
 
   case 24:
-#line 222 "sintatico.y"
+#line 223 "sintatico.y"
         {
             //posso verificar o se tem retorno criando uma var booleana que ativa quando encontra 'retorno'
             //remover_var_locais()
@@ -1620,11 +1621,11 @@ yyreduce:
             contaVarL =0;
             mostraTabelaCompleta();
         }
-#line 1624 "sintatico.c"
+#line 1625 "sintatico.c"
     break;
 
   case 27:
-#line 247 "sintatico.y"
+#line 248 "sintatico.y"
         {
             strcpy(elemTab.id, atomo);
             elemTab.end = contaVar;
@@ -1638,11 +1639,11 @@ yyreduce:
             npar++;
             //printf("\n %d npar \n", npar);
         }
-#line 1642 "sintatico.c"
+#line 1643 "sintatico.c"
     break;
 
   case 35:
-#line 279 "sintatico.y"
+#line 280 "sintatico.y"
         {
             //mostraPilha();
             int tip = desempilha('t');
@@ -1655,39 +1656,39 @@ yyreduce:
             fprintf(yyout,"\tRTSP\t%d\n", npar); // RTSP n => onde n é numero de parametros
             verificaRetorno = 1;
         }
-#line 1659 "sintatico.c"
+#line 1660 "sintatico.c"
     break;
 
   case 38:
-#line 308 "sintatico.y"
+#line 309 "sintatico.y"
         { 
             //comparar se é local
             int pos = buscaSimbolo(atomo);         
             fprintf(yyout,"\tLEIA\n\tARZG\t%d\n", tabSimb[pos].end); 
         }
-#line 1669 "sintatico.c"
+#line 1670 "sintatico.c"
     break;
 
   case 39:
-#line 317 "sintatico.y"
+#line 318 "sintatico.y"
         { 
             desempilha('t');
             fprintf(yyout,"\tESCR\n"); 
         }
-#line 1678 "sintatico.c"
+#line 1679 "sintatico.c"
     break;
 
   case 40:
-#line 325 "sintatico.y"
+#line 326 "sintatico.y"
         { 
             fprintf(yyout,"L%d\tNADA\n", ++rotulo);     // L de label 
             empilhar(rotulo, 'r');
         }
-#line 1687 "sintatico.c"
+#line 1688 "sintatico.c"
     break;
 
   case 41:
-#line 330 "sintatico.y"
+#line 331 "sintatico.y"
         { 
             int tip = desempilha('t');
             if (tip != LOG)
@@ -1695,22 +1696,22 @@ yyreduce:
             fprintf(yyout,"\tDSVF\tL%d\n", ++rotulo); 
             empilhar(rotulo, 'r');
         }
-#line 1699 "sintatico.c"
+#line 1700 "sintatico.c"
     break;
 
   case 42:
-#line 339 "sintatico.y"
+#line 340 "sintatico.y"
         { 
             int rot1 = desempilha('r');
             int rot2 = desempilha('r');
             fprintf(yyout,"\tDSVS\tL%d\n", rot2); 
             fprintf(yyout,"L%d\tNADA\n", rot1); 
         }
-#line 1710 "sintatico.c"
+#line 1711 "sintatico.c"
     break;
 
   case 43:
-#line 349 "sintatico.y"
+#line 350 "sintatico.y"
         { 
             int tip = desempilha('t');
             if (tip != LOG)
@@ -1718,40 +1719,40 @@ yyreduce:
             fprintf(yyout,"\tDSVF\tL%d\n", ++rotulo); 
             empilhar(rotulo, 'r');
         }
-#line 1722 "sintatico.c"
+#line 1723 "sintatico.c"
     break;
 
   case 44:
-#line 357 "sintatico.y"
+#line 358 "sintatico.y"
         { 
             int rot = desempilha('r');
             fprintf(yyout,"\tDSVS\tL%d\n", ++rotulo); 
             fprintf(yyout,"L%d\tNADA\n", rot); 
             empilhar(rotulo, 'r');
         }
-#line 1733 "sintatico.c"
+#line 1734 "sintatico.c"
     break;
 
   case 45:
-#line 364 "sintatico.y"
+#line 365 "sintatico.y"
         { 
             int rot = desempilha('r');
             fprintf(yyout,"L%d\tNADA\n", rot); 
         }
-#line 1742 "sintatico.c"
+#line 1743 "sintatico.c"
     break;
 
   case 46:
-#line 372 "sintatico.y"
+#line 373 "sintatico.y"
         {
             int pos = buscaSimbolo(atomo);
             empilhar(pos, 'p');
         }
-#line 1751 "sintatico.c"
+#line 1752 "sintatico.c"
     break;
 
   case 47:
-#line 377 "sintatico.y"
+#line 378 "sintatico.y"
         { 
             int tip = desempilha('t');
             int pos = desempilha('p');
@@ -1762,92 +1763,92 @@ yyreduce:
             else
                 fprintf(yyout,"\tARZL\t%d\n", tabSimb[pos].end);
         }
-#line 1766 "sintatico.c"
+#line 1767 "sintatico.c"
     break;
 
   case 48:
-#line 391 "sintatico.y"
+#line 392 "sintatico.y"
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tMULT\n"); 
         }
-#line 1775 "sintatico.c"
+#line 1776 "sintatico.c"
     break;
 
   case 49:
-#line 396 "sintatico.y"
+#line 397 "sintatico.y"
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tDIVI\n"); 
         }
-#line 1784 "sintatico.c"
+#line 1785 "sintatico.c"
     break;
 
   case 50:
-#line 401 "sintatico.y"
+#line 402 "sintatico.y"
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tSOMA\n"); 
         }
-#line 1793 "sintatico.c"
+#line 1794 "sintatico.c"
     break;
 
   case 51:
-#line 406 "sintatico.y"
+#line 407 "sintatico.y"
         { 
             testaTipo(INT, INT, INT);
             fprintf(yyout,"\tSUBT\n"); 
         }
-#line 1802 "sintatico.c"
+#line 1803 "sintatico.c"
     break;
 
   case 52:
-#line 411 "sintatico.y"
+#line 412 "sintatico.y"
         { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMMA\n"); 
         }
-#line 1811 "sintatico.c"
+#line 1812 "sintatico.c"
     break;
 
   case 53:
-#line 416 "sintatico.y"
+#line 417 "sintatico.y"
         { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMME\n"); 
         }
-#line 1820 "sintatico.c"
+#line 1821 "sintatico.c"
     break;
 
   case 54:
-#line 421 "sintatico.y"
+#line 422 "sintatico.y"
         { 
             testaTipo(INT, INT, LOG);
             fprintf(yyout,"\tCMIG\n"); 
         }
-#line 1829 "sintatico.c"
+#line 1830 "sintatico.c"
     break;
 
   case 55:
-#line 426 "sintatico.y"
+#line 427 "sintatico.y"
         { 
             testaTipo(LOG, LOG, LOG);
             fprintf(yyout,"\tCONJ\n"); 
         }
-#line 1838 "sintatico.c"
+#line 1839 "sintatico.c"
     break;
 
   case 56:
-#line 431 "sintatico.y"
+#line 432 "sintatico.y"
         { 
             testaTipo(LOG, LOG, LOG);
             fprintf(yyout,"\tDISJ\n"); 
         }
-#line 1847 "sintatico.c"
+#line 1848 "sintatico.c"
     break;
 
   case 58:
-#line 442 "sintatico.y"
+#line 443 "sintatico.y"
         {
             // int pos = buscaSimbolo(atomo);  
             // fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
@@ -1855,11 +1856,11 @@ yyreduce:
             int pos = buscaSimbolo(atomo);
             empilhar(pos, 'p');
         }
-#line 1859 "sintatico.c"
+#line 1860 "sintatico.c"
     break;
 
   case 59:
-#line 453 "sintatico.y"
+#line 454 "sintatico.y"
         {
             //...
             int pos = desempilha('p');
@@ -1869,35 +1870,41 @@ yyreduce:
                 fprintf(yyout,"\tCRVL\t%d\n", tabSimb[pos].end); 
             empilhar(tabSimb[pos].tip, 't');
         }
-#line 1873 "sintatico.c"
+#line 1874 "sintatico.c"
     break;
 
   case 60:
-#line 463 "sintatico.y"
+#line 464 "sintatico.y"
         {
             //....
             fprintf(yyout,"\tAMEM\t%d\n", 1); //TESTE
             posFunc = buscaSimbolo(atomo);
-            printf("\nFunção: %s\n", tabSimb[posFunc].id);
+            
         }
-#line 1884 "sintatico.c"
+#line 1885 "sintatico.c"
     break;
 
   case 61:
-#line 470 "sintatico.y"
+#line 471 "sintatico.y"
         {
             verTipoPar = 0;
         }
-#line 1892 "sintatico.c"
+#line 1893 "sintatico.c"
     break;
 
   case 62:
-#line 474 "sintatico.y"
+#line 475 "sintatico.y"
         {
             //....
             // fprintf(yyout,"\tSVCP\n");
             // fprintf(yyout,"\tDSVS\tL%d\n", rotulo);
             //duvida: precisa desempilhar?
+            int np = tabSimb[posFunc].npa;
+            printf("\nFunção: %s, qPar: %d, qArgs: %d\n", tabSimb[posFunc].id, np, qArgs);
+            if(qArgs != np)
+                yyerror("Erro na quantidade de parametros.");
+            qArgs = 0;
+
             int pos = desempilha('p');
             fprintf(yyout,"\tSVCP\n");
             fprintf(yyout,"\tDSVS\tL%d\n", tabSimb[pos].rot);
@@ -1905,61 +1912,63 @@ yyreduce:
             //mostraPilha();
             
         }
-#line 1909 "sintatico.c"
+#line 1916 "sintatico.c"
     break;
 
   case 64:
-#line 491 "sintatico.y"
+#line 498 "sintatico.y"
         {
             //a partir de cada expressao desempilha tipo
+
             int t = desempilha('t');
             if(tabSimb[posFunc].par[verTipoPar] != t)
                 yyerror("Incompatibilidade no tipo dos parametros.");
             verTipoPar++;
-        }
-#line 1921 "sintatico.c"
-    break;
-
-  case 67:
-#line 511 "sintatico.y"
-        { 
-            fprintf(yyout,"\tCRCT\t%s\n", atomo); 
-            empilhar(INT,'t');
+            qArgs++;
         }
 #line 1930 "sintatico.c"
     break;
 
-  case 68:
-#line 516 "sintatico.y"
+  case 67:
+#line 520 "sintatico.y"
         { 
-            fprintf(yyout,"\tCRCT\t1\n"); 
-            empilhar(LOG, 't');
+            fprintf(yyout,"\tCRCT\t%s\n", atomo); 
+            empilhar(INT,'t');
         }
 #line 1939 "sintatico.c"
     break;
 
-  case 69:
-#line 521 "sintatico.y"
+  case 68:
+#line 525 "sintatico.y"
         { 
-            fprintf(yyout,"\tCRCT\t0\n"); 
+            fprintf(yyout,"\tCRCT\t1\n"); 
             empilhar(LOG, 't');
         }
 #line 1948 "sintatico.c"
     break;
 
+  case 69:
+#line 530 "sintatico.y"
+        { 
+            fprintf(yyout,"\tCRCT\t0\n"); 
+            empilhar(LOG, 't');
+        }
+#line 1957 "sintatico.c"
+    break;
+
   case 70:
-#line 526 "sintatico.y"
+#line 535 "sintatico.y"
         { 
             int t = desempilha('t');
             if (t != LOG) yyerror ("Incompatibilidade de tipo!");       // Verificação se o termo é lógico
             fprintf(yyout,"\tNEGA\n"); 
             empilhar(LOG, 't');
         }
-#line 1959 "sintatico.c"
+#line 1968 "sintatico.c"
     break;
 
 
-#line 1963 "sintatico.c"
+#line 1972 "sintatico.c"
 
       default: break;
     }
@@ -2191,7 +2200,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 535 "sintatico.y"
+#line 544 "sintatico.y"
 
 
 int main (int argc, char *argv[]) {

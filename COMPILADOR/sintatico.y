@@ -15,6 +15,7 @@ int npar = 0;
 int posFunc;
 int verificaRetorno = 0;
 int verTipoPar = 0;
+int qArgs = 0;
 %}
 
 %token T_PROGRAMA
@@ -464,7 +465,7 @@ chamada
             //....
             fprintf(yyout,"\tAMEM\t%d\n", 1); //TESTE
             posFunc = buscaSimbolo(atomo);
-            printf("\nFunção: %s\n", tabSimb[posFunc].id);
+            
         }
         lista_argumentos //tratar depois de argumentos a pilha semantica
         {
@@ -476,6 +477,12 @@ chamada
             // fprintf(yyout,"\tSVCP\n");
             // fprintf(yyout,"\tDSVS\tL%d\n", rotulo);
             //duvida: precisa desempilhar?
+            int np = tabSimb[posFunc].npa;
+            printf("\nFunção: %s, qPar: %d, qArgs: %d\n", tabSimb[posFunc].id, np, qArgs);
+            if(qArgs != np)
+                yyerror("Erro na quantidade de parametros.");
+            qArgs = 0;
+
             int pos = desempilha('p');
             fprintf(yyout,"\tSVCP\n");
             fprintf(yyout,"\tDSVS\tL%d\n", tabSimb[pos].rot);
@@ -490,10 +497,12 @@ lista_argumentos
     |   expressao
         {
             //a partir de cada expressao desempilha tipo
+
             int t = desempilha('t');
             if(tabSimb[posFunc].par[verTipoPar] != t)
                 yyerror("Incompatibilidade no tipo dos parametros.");
             verTipoPar++;
+            qArgs++;
         }
         lista_argumentos
     ;
