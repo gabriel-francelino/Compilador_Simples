@@ -1,0 +1,27 @@
+programa teste
+    inteiro i
+
+    func inteiro f0 ()
+        inteiro a
+    inicio
+        a <- 2
+        i <- 10 + a
+        retorne i
+    fimfunc
+
+    func inteiro f ()
+    inicio
+        i <- 10
+        retorne i
+    fimfunc
+
+    func inteiro f1 ()
+    inicio
+        i <- 10 + 2
+        retorne i
+    fimfunc
+
+inicio
+    escreva f()
+    escreva f1()
+fimprograma

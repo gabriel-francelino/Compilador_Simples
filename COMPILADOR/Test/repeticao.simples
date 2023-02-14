@@ -1,0 +1,13 @@
+programa teste
+    inteiro n
+    func inteiro f1 ( inteiro i )
+    inicio
+        enquanto i < 10 faca
+            escreva i
+            i <- i + 1
+        fimenquanto
+        retorne i
+    fimfunc
+inicio
+    escreva f1 ( 1 )
+fimprograma
