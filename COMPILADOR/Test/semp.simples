@@ -24,4 +24,5 @@ programa teste
 inicio
     escreva f()
     escreva f1()
+    escreva f0()
 fimprograma

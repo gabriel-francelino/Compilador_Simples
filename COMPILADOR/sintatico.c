@@ -554,8 +554,8 @@ static const yytype_int16 yyrline[] =
      269,   270,   271,   272,   273,   278,   302,   303,   307,   316,
      325,   330,   324,   349,   357,   348,   372,   371,   390,   395,
      400,   405,   410,   415,   420,   425,   430,   435,   441,   453,
-     463,   470,   462,   489,   491,   490,   503,   511,   516,   521,
-     526,   533
+     463,   470,   462,   489,   491,   490,   502,   510,   515,   520,
+     525,   532
 };
 #endif
 
@@ -1912,55 +1912,54 @@ yyreduce:
 #line 491 "sintatico.y"
         {
             //a partir de cada expressao desempilha tipo
-            //printf("\nFunção: %s\n", tabSimb[posFunc].id);
             int t = desempilha('t');
             if(tabSimb[posFunc].par[verTipoPar] != t)
                 yyerror("Incompatibilidade no tipo dos parametros.");
             verTipoPar++;
         }
-#line 1922 "sintatico.c"
+#line 1921 "sintatico.c"
     break;
 
   case 67:
-#line 512 "sintatico.y"
+#line 511 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t%s\n", atomo); 
             empilhar(INT,'t');
         }
-#line 1931 "sintatico.c"
+#line 1930 "sintatico.c"
     break;
 
   case 68:
-#line 517 "sintatico.y"
+#line 516 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t1\n"); 
             empilhar(LOG, 't');
         }
-#line 1940 "sintatico.c"
+#line 1939 "sintatico.c"
     break;
 
   case 69:
-#line 522 "sintatico.y"
+#line 521 "sintatico.y"
         { 
             fprintf(yyout,"\tCRCT\t0\n"); 
             empilhar(LOG, 't');
         }
-#line 1949 "sintatico.c"
+#line 1948 "sintatico.c"
     break;
 
   case 70:
-#line 527 "sintatico.y"
+#line 526 "sintatico.y"
         { 
             int t = desempilha('t');
             if (t != LOG) yyerror ("Incompatibilidade de tipo!");       // Verificação se o termo é lógico
             fprintf(yyout,"\tNEGA\n"); 
             empilhar(LOG, 't');
         }
-#line 1960 "sintatico.c"
+#line 1959 "sintatico.c"
     break;
 
 
-#line 1964 "sintatico.c"
+#line 1963 "sintatico.c"
 
       default: break;
     }
@@ -2192,7 +2191,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 536 "sintatico.y"
+#line 535 "sintatico.y"
 
 
 int main (int argc, char *argv[]) {
