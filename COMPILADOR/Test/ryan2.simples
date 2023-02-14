@@ -1,0 +1,21 @@
+programa teste9 
+inteiro x y
+func inteiro soma(inteiro a inteiro b)
+inicio
+    retorne a + b
+fimfunc
+func inteiro mult(inteiro c inteiro d)
+inicio
+    retorne c * d
+fimfunc
+func inteiro quadrado(inteiro s)
+inicio 
+    retorne s * s 
+fimfunc
+inicio
+    leia x
+    leia y
+    escreva soma (x y)
+    escreva mult (x y)
+    escreva quadrado(x)
+fimprograma

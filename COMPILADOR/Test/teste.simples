@@ -1,6 +1,6 @@
 programa teste
     inteiro i j a
-    logico i
+    //logico i
     func inteiro f ( inteiro a logico b inteiro c inteiro d )
     inteiro x y z
     inicio
