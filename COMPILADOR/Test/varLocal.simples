@@ -1,0 +1,15 @@
+programa teste1
+    func inteiro i ( inteiro a inteiro b )
+    inteiro x
+    inicio
+        retorne a
+    fimfunc
+
+    func inteiro j ( inteiro a inteiro b )
+    inteiro y
+    inicio
+        retorne a
+    fimfunc
+inicio
+    escreva i ( 10 20 )
+fimprograma

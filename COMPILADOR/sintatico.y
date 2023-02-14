@@ -232,6 +232,7 @@ funcao
             escopo = 'G';
             removeSimbolosLocais(posFunc, npar+contaVarL);
             npar = 0;
+            contaVarL =0;
             mostraTabelaCompleta();
         } 
 
@@ -462,6 +463,8 @@ chamada
         {
             //....
             fprintf(yyout,"\tAMEM\t%d\n", 1); //TESTE
+            posFunc = buscaSimbolo(atomo);
+            printf("\nFunção: %s\n", tabSimb[posFunc].id);
         }
         lista_argumentos //tratar depois de argumentos a pilha semantica
         {
