@@ -146,7 +146,7 @@ void mostraTabelaCompleta() {
             }
             printf("] ");
         }else{
-            puts(" - ");
+            printf(" - ");
         }
     }
     puts("\n");
