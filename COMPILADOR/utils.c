@@ -45,12 +45,19 @@ int buscaSimbolo (char *id) {
     return i;
 }
 
+int charcmp(char a, char b){
+    if(a == b)
+        return 0;
+    else
+        return 1;
+}
+
 void insereSimbolo (struct elemTabSimbolos elem) {
     int i;
     // maiuscula(elem.id);       // para fazer diferenciação entre variáveis maiúsculas e minúsculas
     if (posTab == TAM_TAB)
         yyerror("Tabela de Simbolos Cheia!");
-    for (i = posTab - 1; (strcmp(tabSimb[i].id, elem.id) || tabSimb[i].esc != 'L' )&& i >= 0; i--)
+    for (i = posTab - 1; (strcmp(tabSimb[i].id, elem.id) || charcmp(tabSimb[i].esc, elem.esc) )&& i >= 0; i--)
         ;
     if (i != -1) {
         char msg[200];
