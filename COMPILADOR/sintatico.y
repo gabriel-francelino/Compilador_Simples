@@ -158,7 +158,7 @@ lista_variaveis
     ;
 
 rotinas
-    :
+    :   /* vazio */
     |   {
             fprintf(yyout, "\tDSVS\tL0\n");
         }
@@ -168,7 +168,6 @@ rotinas
         }
     ;
 
-//regras para as funcoes
 funcoes
     :   funcao
     |   funcao funcoes
@@ -184,35 +183,24 @@ funcao
             elemTab.rot = ++rotulo;
             elemTab.cat = 'F';
             elemTab.tip = tipo;
-            //precisa guardar a posicao que a funcao foi cadastrada na tabela de simbolos
             insereSimbolo(elemTab);
-            posFunc = buscaSimbolo(atomo);
-            //empilhar(pos, 'p');
-
+            posFunc = buscaSimbolo(atomo);  // guarda a posição da função
             contaVar++;
             fprintf(yyout,"L%d\tENSP\n", rotulo);     
-            //empilhar(rotulo,'r');
-            escopo = 'L';  
-            //mostraPilha();         
+            escopo = 'L';           
         }
         T_ABRE parametros T_FECHA
         { 
-        //  ajustar_parametros(); depois de passar pelo fecha
             int pos = buscaSimbolo(atomo);
-            ajustaParam(pos, npar);
+            ajustaParam(pos, npar);     // ajusta o endereço dos parâmetros
         }
         variaveis 
         {
             mostraTabelaCompleta();
-            //empilhar(contaVarL, 'n'); //acho que pode fazer uma condição para testar
             if (contaVarL) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVarL); 
         } 
-        T_INICIO lista_comandos 
-        {
-            mostraTabelaCompleta();
-        }
-        T_FIMFUNC
+        T_INICIO lista_comandos T_FIMFUNC
         {
             //posso verificar o se tem retorno criando uma var booleana que ativa quando encontra 'retorno'
             //remover_var_locais()
