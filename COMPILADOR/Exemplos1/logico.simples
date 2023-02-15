@@ -1,0 +1,30 @@
+programa logicos
+    func inteiro l( inteiro x inteiro y)
+    inicio
+        enquanto nao (x = y) ou nao (y = 0) faca
+            x <- x + 1
+            escreva x
+        fimenquanto
+        retorne x
+    fimfunc
+
+    func inteiro l1( inteiro x inteiro y)
+    inicio
+        enquanto (x < y) e (y < 3) faca
+            x <- x + 1
+            escreva x
+        fimenquanto
+        retorne x
+    fimfunc
+
+    func inteiro l2( inteiro x inteiro y)
+    inicio
+        se (x < y) e (y < 3) entao
+            retorne x + 3
+        senao
+            retorne x - 3
+        fimse
+    fimfunc
+inicio
+    escreva l2( 0 4 )
+fimprograma

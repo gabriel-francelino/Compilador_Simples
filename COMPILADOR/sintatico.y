@@ -269,7 +269,6 @@ entrada_saida
 leitura 
     :   T_LEIA T_IDENTIFICADOR
         { 
-            //comparar se é local
             int pos = buscaSimbolo(atomo);
             if(tabSimb[pos].esc == 'G')         
                 fprintf(yyout,"\tLEIA\n\tARZG\t%d\n", tabSimb[pos].end);
@@ -289,7 +288,7 @@ escrita
 repeticao
     :   T_ENQUANTO 
         { 
-            fprintf(yyout,"L%d\tNADA\n", ++rotulo);     // L de label 
+            fprintf(yyout,"L%d\tNADA\n", ++rotulo);
             empilhar(rotulo, 'r');
         } 
         expressao T_FACA 
