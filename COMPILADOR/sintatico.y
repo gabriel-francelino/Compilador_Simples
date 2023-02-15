@@ -81,7 +81,7 @@ programa
         rotinas 
         T_INICIO
         {
-            mostraTabelaCompleta();
+            // mostraTabelaCompleta();
             escopo = 'L';
         }   
         lista_comandos 
@@ -95,7 +95,7 @@ programa
             if (conta)
                 fprintf(yyout, "\tDMEM\t%d\n", conta); 
             fprintf(yyout, "\tFIMP\n");
-            mostraPilha();
+            // mostraPilha();
         }
     ;
 
@@ -198,7 +198,7 @@ funcao
         }
         variaveis 
         {
-            mostraTabelaCompleta();
+            // mostraTabelaCompleta();
             if (contaVarL) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVarL); 
         } 
@@ -211,7 +211,7 @@ funcao
             removeSimbolosLocais(posFunc, npar+contaVarL);  // remove os símbolos locais da tabela de simbolos
             npar = 0;
             contaVarL = 0;
-            mostraTabelaCompleta();
+            // mostraTabelaCompleta();
         } 
 
 parametros
@@ -419,7 +419,8 @@ chamada
     :   // sem parametros eh uma variavel
         {
             int pos = desempilha('p');
-            //posFunc = pos;
+            if(tabSimb[pos].cat == 'F')
+                yyerror("Função sem parâmetros!");
             if(tabSimb[pos].esc == 'G')
                 fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
             else
@@ -428,7 +429,7 @@ chamada
         }
     |   T_ABRE 
         {
-            mostraPilha();
+            // mostraPilha();
             fprintf(yyout,"\tAMEM\t%d\n", 1);
             posFunc = desempilha('p');  
             empilhar(posFunc, 'p');
@@ -442,15 +443,15 @@ chamada
             //int np = tabSimb[posFunc].npa;
             //chamaFun = desempilha('p');
             int np = tabSimb[posFunc].npa;
-            //mostraPilha();
+
             for(int i=0; i < np; i++){
                 //mostraPilha();
                 desempilha('a');
             }
             //mostraPilha();
             chamaFun = desempilha('p');
-            //int np = tabSimb[chamaFun].npa;
-            printf("Função: %s, qPar: %d, qArgs: %d\n", tabSimb[chamaFun].id, np, qArgs);
+            // int np = tabSimb[chamaFun].npa;
+            // printf("Função: %s, qPar: %d, qArgs: %d\n", tabSimb[chamaFun].id, np, qArgs);
             // if(qArgs != np)
             //     yyerror("Erro na quantidade de parametros.");
             qArgs = 0;

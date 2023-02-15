@@ -109,7 +109,7 @@ void removeSimbolosLocais(int posFunc, int nLoc){
         if(tabSimb[i].esc == 'L'){
             for(j = i; j < n - 1; j++){
                 tabSimb[j] = tabSimb[j+nLoc];
-                printf("\nRemovendo..\n");
+                //printf("\nRemovendo..\n");
             }
             n--;
             i--;
