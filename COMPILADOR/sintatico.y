@@ -202,19 +202,13 @@ funcao
         } 
         T_INICIO lista_comandos T_FIMFUNC
         {
-            //posso verificar o se tem retorno criando uma var booleana que ativa quando encontra 'retorno'
-            //remover_var_locais()
-            if(!verificaRetorno)
+            if(verificaRetorno == 0)    // 0 = Não tem 'retorne' | 1 = Tem 'retorne'
                 yyerror("Esperado comando de retorno!");
             verificaRetorno = 0;
-            // int contaL = desempilha('n');    //DMEM n para as variaveis locais
-            // if (contaL)
-            //     fprintf(yyout, "\tDMEM\t%d\n", contaL);
-
             escopo = 'G';
-            removeSimbolosLocais(posFunc, npar+contaVarL);
+            removeSimbolosLocais(posFunc, npar+contaVarL);  // remove os símbolos locais da tabela de simbolos
             npar = 0;
-            contaVarL =0;
+            contaVarL = 0;
             mostraTabelaCompleta();
         } 
 
@@ -228,18 +222,16 @@ parametro
         T_IDENTIFICADOR
         {
             strcpy(elemTab.id, atomo);
+            elemTab.esc = escopo;
             elemTab.end = contaVar;
             elemTab.rot = -1;
-            elemTab.tip = tipo;
             elemTab.cat = 'P';
-            elemTab.esc = escopo;
+            elemTab.tip = tipo;
             insereSimbolo(elemTab);
             tabSimb[posFunc].par[npar] = tipo;
             contaVar++;
             npar++;
-            //printf("\n %d npar \n", npar);
         }
-        // {cadastrar o parametro}
     ;
 
 lista_comandos
@@ -253,31 +245,20 @@ comando
     |   selecao
     |   atribuicao 
     |   retorno
-    //|   chamada //não tenho certeza se precisa
     ;
 
 retorno
     :   T_RETORNE expressao
         {
-            //mostraPilha();
-            int tip = desempilha('t');
-            //int pos = buscaSimbolo(atomo);
-            if (tabSimb[posFunc].tip != tip)
+            int tip = desempilha('t');          // desempilha o tipo da expresssão
+            if (tabSimb[posFunc].tip != tip)    // compara se o tipo é igual da função
                 yyerror("Incompatibilidade de tipo!");
             fprintf(yyout,"\tARZL\t%d\n", tabSimb[posFunc].end);
             if (contaVarL)
                 fprintf(yyout, "\tDMEM\t%d\n", contaVarL); 
-            fprintf(yyout,"\tRTSP\t%d\n", npar); // RTSP n => onde n é numero de parametros
-            verificaRetorno = 1; //atribui 1 se tiver retorno
+            fprintf(yyout,"\tRTSP\t%d\n", npar);
+            verificaRetorno = 1;  // atribui 1 se tiver retorno
         }
-      // {verificar se esta no escopo local
-      //  verificar se o tipo da expressao é compativel com o tipo da funcao
-      //  ARZL x
-      //  DMEM x
-      //  RTSP x}
-      // deve gerar (depois da trad da expressao)
-      // ARZL (valor de retorno), DMEM (se tiver variavel local)
-      // RTSP n 
     ;
 
 entrada_saida
@@ -289,8 +270,11 @@ leitura
     :   T_LEIA T_IDENTIFICADOR
         { 
             //comparar se é local
-            int pos = buscaSimbolo(atomo);         
-            fprintf(yyout,"\tLEIA\n\tARZG\t%d\n", tabSimb[pos].end); 
+            int pos = buscaSimbolo(atomo);
+            if(tabSimb[pos].esc == 'G')         
+                fprintf(yyout,"\tLEIA\n\tARZG\t%d\n", tabSimb[pos].end);
+            else 
+                fprintf(yyout,"\tLEIA\n\tARZL\t%d\n", tabSimb[pos].end);
         }
     ;
 

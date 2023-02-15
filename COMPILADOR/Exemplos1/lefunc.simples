@@ -1,0 +1,20 @@
+programa lefunc
+    inteiro n m
+    func inteiro le()
+        inteiro a b c d f
+    inicio
+        leia a
+        retorne a
+    fimfunc
+
+    func inteiro le2()
+        inteiro a b c d f
+    inicio
+        leia a
+        leia b
+        retorne a
+    fimfunc
+inicio
+    leia m
+    //escreva le2()
+fimprograma
