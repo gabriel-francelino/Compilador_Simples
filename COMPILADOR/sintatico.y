@@ -2,20 +2,19 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
 #include "lexico.c"
 #include "utils.c"
-int contaVar;       // conta o número de variáveis
-int contaVarG;      // conta número de variáveis globais
+
+int contaVar;       // conta o número de variáveis globais
 int contaVarL;      // conta número de variáveis locais
 int rotulo = 0;     // marcar lugares no código
-int tipo;
-char escopo;
-int npar = 0;
-int posFunc;
-int verificaRetorno = 0;
-int verTipoPar = 0;
-int qArgs = 0;
+int tipo;           // captura o tipo
+char escopo;        // marca o escopo
+int npar = 0;       // conta o número de parâmetros
+int posFunc;        // captura a posição atual da função
+int verificaRetorno = 0;    // verifica se o uso do 'retorne' está correto
+int verTipoPar = 0; // usado para verificar os tipos de parâmetros.
+int qArgs = 0;      // conta número de argumentos
 %}
 
 %token T_PROGRAMA
@@ -69,25 +68,16 @@ programa
     :   cabecalho 
         { 
             contaVar = 0; 
-            contaVarL = 0;  //conta variaveis locais - teste
+            contaVarL = 0;
             escopo = 'G';
         }
         variaveis 
         {
-            mostraTabelaCompleta();
             empilhar(contaVar, 'n'); 
             if (contaVar) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVar); 
         }
-        // acrescentar as funcoes
         rotinas 
-        /* variaveis //variaveis locais
-        {
-            mostraTabela();
-            empilhar(contaVarL); 
-            if (contaVarL) 
-                fprintf(yyout,"\tAMEM\t%d\n", contaVarL); 
-        } */
         T_INICIO
         {
             mostraTabelaCompleta();
@@ -117,16 +107,14 @@ variaveis
     |   declaracao_variaveis
     ;
 
-//teria que mudar aqui para adaptar para a funcao
 declaracao_variaveis
     :   tipo lista_variaveis declaracao_variaveis
     |   tipo lista_variaveis
     ;
 
-//REGRA "tipo"
 tipo        
     :   T_LOGICO
-        { tipo = LOG; }     // Variável "tipo"
+        { tipo = LOG; }     
     |   T_INTEIRO
         { tipo = INT; }
     ;
@@ -135,6 +123,7 @@ lista_variaveis
     :   lista_variaveis T_IDENTIFICADOR 
         {  
             strcpy(elemTab.id, atomo);
+            elemTab.esc = escopo;
             if(escopo == 'G'){
                 elemTab.end = contaVar;
                 contaVar++;
@@ -143,15 +132,15 @@ lista_variaveis
                 contaVarL++;
             }
             elemTab.rot = -1;
-            elemTab.tip = tipo;
             elemTab.cat = 'V';
-            elemTab.esc = escopo;
+            elemTab.tip = tipo;
             elemTab.npa = -1;
             insereSimbolo(elemTab);
                         
         }
     |   T_IDENTIFICADOR
         { 
+            elemTab.esc = escopo;
             strcpy(elemTab.id, atomo);
              if(escopo == 'G'){
                 elemTab.end = contaVar;
@@ -161,9 +150,8 @@ lista_variaveis
                 contaVarL++;
             }
             elemTab.rot = -1;
-            elemTab.tip = tipo;
             elemTab.cat = 'V';
-            elemTab.esc = escopo;
+            elemTab.tip = tipo;
             elemTab.npa = -1;
             insereSimbolo(elemTab);               
         }

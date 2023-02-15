@@ -6,7 +6,7 @@ programa teste4
             retorne a * fatorial (a - 1)
         senao 
             retorne 1
-        5fimse
+        fimse
     fimfunc
 inicio
     leia x
