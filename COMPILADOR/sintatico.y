@@ -400,7 +400,7 @@ expressao
     |   termo
     ;
 
-// A funcao eh chamada como um termo numa expresao
+
 
 identificador
     :   T_IDENTIFICADOR
@@ -414,9 +414,8 @@ identificador
     ;
 
 chamada
-    : // sem parametros eh uma variavel
+    :   // sem parametros eh uma variavel
         {
-            //...
             int pos = desempilha('p');
             if(tabSimb[pos].esc == 'G')
                 fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
@@ -426,32 +425,24 @@ chamada
         }
     |   T_ABRE 
         {
-            //....
-            fprintf(yyout,"\tAMEM\t%d\n", 1); //TESTE
-            posFunc = buscaSimbolo(atomo);
-            
+            fprintf(yyout,"\tAMEM\t%d\n", 1);
+            posFunc = buscaSimbolo(atomo);  
         }
-        lista_argumentos //tratar depois de argumentos a pilha semantica
+        lista_argumentos 
         {
-            verTipoPar = 0;
+            verTipoPar = 0; // atribui com zero para recomeçar a contagem na próxima chamada
         }
         T_FECHA
         {
-            //....
-            // fprintf(yyout,"\tSVCP\n");
-            // fprintf(yyout,"\tDSVS\tL%d\n", rotulo);
-            //duvida: precisa desempilhar?
             int np = tabSimb[posFunc].npa;
-            printf("\nFunção: %s, qPar: %d, qArgs: %d\n", tabSimb[posFunc].id, np, qArgs);
+            //printf("\nFunção: %s, qPar: %d, qArgs: %d\n", tabSimb[posFunc].id, np, qArgs);
             if(qArgs != np)
                 yyerror("Erro na quantidade de parametros.");
             qArgs = 0;
-
             int pos = desempilha('p');
             fprintf(yyout,"\tSVCP\n");
             fprintf(yyout,"\tDSVS\tL%d\n", tabSimb[pos].rot);
             empilhar(tabSimb[pos].tip, 't');
-            //mostraPilha();
             
         }
     ;
@@ -460,8 +451,7 @@ lista_argumentos
     :
     |   expressao
         {
-            //a partir de cada expressao desempilha tipo
-
+            // a partir de cada expressao do argumento desempilha tipo e compara 
             int t = desempilha('t');
             if(tabSimb[posFunc].par[verTipoPar] != t)
                 yyerror("Incompatibilidade no tipo dos parametros.");
@@ -473,13 +463,6 @@ lista_argumentos
 
 termo
     :   identificador chamada
-    /* : T_IDENTIFICADOR
-        {
-            int pos = buscaSimbolo(atomo);
-            fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
-            empilhar(tabSimb[pos].tip);
-            
-        } */
     |   T_NUMERO
         { 
             fprintf(yyout,"\tCRCT\t%s\n", atomo); 
@@ -498,7 +481,7 @@ termo
     |   T_NAO termo
         { 
             int t = desempilha('t');
-            if (t != LOG) yyerror ("Incompatibilidade de tipo!");       // Verificação se o termo é lógico
+            if (t != LOG) yyerror ("Incompatibilidade de tipo!");     
             fprintf(yyout,"\tNEGA\n"); 
             empilhar(LOG, 't');
         }
