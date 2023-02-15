@@ -1,15 +1,27 @@
 programa funcomp
     func inteiro f (inteiro a inteiro b)
     inicio
-        retorne a * 2
+        retorne b * 2
     fimfunc
 
     func inteiro g (inteiro a inteiro b)
     inicio
-        retorne a - 2
+        retorne b - 2
+    fimfunc
+
+    func logico h (inteiro a logico b)
+    inicio
+        se b = V entao
+            retorne F
+        senao
+            retorne V
+        fimse
     fimfunc
 
 inicio
     escreva f(20 g(4 4))
-    //escreva g(10 20)
+    escreva g(g(4 4) 20)
+    escreva g(g(20 30) f(8 8))
+    escreva f(10 30)
+    escreva h(2 V)
 fimprograma
