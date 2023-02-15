@@ -1,0 +1,15 @@
+programa funcomp
+    func inteiro f (inteiro a inteiro b)
+    inicio
+        retorne a * 2
+    fimfunc
+
+    func inteiro g (inteiro a inteiro b)
+    inicio
+        retorne a - 2
+    fimfunc
+
+inicio
+    escreva f(20 g(4 4))
+    //escreva g(10 20)
+fimprograma
