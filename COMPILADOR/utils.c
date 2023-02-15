@@ -12,26 +12,40 @@ enum
     LOG
 };
 
+/**
+ * Estrutura da tabela de símbolos
+*/
 struct elemTabSimbolos {
     char id[100];       // identificador
+    char esc;           // escopo: 'G'=GLOBAL, 'L'=LOCAL
     int end;            // endereço global ou deslocamento local
-    int tip;            // tipo variável
-    char esc;           // escopo: 'g'=GLOBAL, 'l'=LOCAL
     int rot;            // rotulo (especifico para funcao)
-    char cat;           // categoria: 'f'=FUN, 'p'=PAR, 'v'=VAR
-    int par[MAX_PAR];   // tipos dos parametros (funcao)
-    // int *par;        // tipos dos parametros (funcao) outra alternativa
+    char cat;           // categoria: 'F'=FUN, 'P'=PAR, 'V'=VAR
+    int tip;            // tipo variável
     int npa;            // numero de parametros (funcao)
+    int par[MAX_PAR];   // tipos dos parametros (funcao)
 } tabSimb[TAM_TAB], elemTab;
 
 int posTab = 0;
 
+/**
+ * Diferencia váriaveis minúsculas de maiúsculas
+ * 
+ * @param s String a ser testada
+*/
 void maiuscula (char *s) {
     for (int i = 0; s[i]; i++)
         s[i] = toupper(s[i]);
     
 }
 
+/**
+ * Busca símbolo na tabela de símbolos
+ * 
+ * @param id Nome do símbolo a ser buscado
+ * 
+ * @return Endereço da posição
+*/
 int buscaSimbolo (char *id) {
     int i;
     // maiuscula(id);        // para fazer diferenciação entre variáveis maiúsculas e minúsculas
@@ -45,6 +59,14 @@ int buscaSimbolo (char *id) {
     return i;
 }
 
+/**
+ * Compara se dois caracteres são iguais
+ * 
+ * @param a Caracter a ser comparado
+ * @param b Caracter a ser comparado
+ * 
+ * @return 0 se for igual e 1 se for diferente
+*/
 int charcmp(char a, char b){
     if(a == b)
         return 0;
@@ -52,6 +74,11 @@ int charcmp(char a, char b){
         return 1;
 }
 
+/**
+ * Insere símbolo na tabela de símbolos
+ * 
+ * @param elem Estrutura a ser inserida na tabela
+*/
 void insereSimbolo (struct elemTabSimbolos elem) {
     int i;
     // maiuscula(elem.id);       // para fazer diferenciação entre variáveis maiúsculas e minúsculas
@@ -65,9 +92,14 @@ void insereSimbolo (struct elemTabSimbolos elem) {
         yyerror(msg);
     }
     tabSimb[posTab++] = elem;
-
 }
 
+/**
+ * Remove símbolos locais da tabela de símbolos
+ * 
+ * @param posFunc Posição da função
+ * @param nLoc Quantidade de variáveis locais a ser removidas
+*/
 void removeSimbolosLocais(int posFunc, int nLoc){
     int i, j;
     int n = posTab;
@@ -77,7 +109,7 @@ void removeSimbolosLocais(int posFunc, int nLoc){
         if(tabSimb[i].esc == 'L'){
             for(j = i; j < n - 1; j++){
                 tabSimb[j] = tabSimb[j+nLoc];
-                puts("Removendo..\n");
+                printf("\nRemovendo..\n");
             }
             n--;
             i--;
@@ -86,17 +118,20 @@ void removeSimbolosLocais(int posFunc, int nLoc){
     posTab -= nLoc;
 }
 
-//sugestão :
-//desenvolver uma rotina para ajustar o endereço dos parametros
-//na tabela de simbolos e o vetor de parametros da funcao
-//depois que for cadastrado o ultimo parametro
-
-//modificar a rptina mostraTabela para apresentar os outros 
-//campos (esc, rot, cat, ...) da tabela
+/**
+ * Escreve o tipo do símbolo da tabela
+ * 
+ * @param i Posição do símbolo
+*/
 char *escreveTip(int i){
     return tabSimb[i].tip == INT? "INT" : "LOG";
 }
 
+/**
+ * Escreve o rótulo do símbolo da tabela
+ * 
+ * @param i Posição do símbolo
+*/
 char *escreveRot(int i){
     static char str[3];
     int rot = tabSimb[i].rot;
@@ -108,6 +143,11 @@ char *escreveRot(int i){
     } 
 }
 
+/**
+ * Escreve o número de parâmetros do símbolo da tabela
+ * 
+ * @param i Posição do símbolo
+*/
 char *escreveNrPar(int i){
     static char str[3];
     int npa = tabSimb[i].npa;
@@ -119,23 +159,16 @@ char *escreveNrPar(int i){
     } 
 }
 
-//char *printa
-
-// void mostraTabela() {
-//     puts("Tabela de Simbolos");
-//     puts("------------------");
-//     printf("%30s | %s | %s \n", "ID", "END", "TIP");
-//     for (int i = 0; i < 50; i++)
-//         printf("-");
-//     for (int i = 0; i < posTab; i++)
-//         printf("\n%30s | %3d | %s", tabSimb[i].id, tabSimb[i].end, tabSimb[i].tip == INT? "INT" : "LOG");
-//     printf("\n");
-// }
-
-/*  TABELA DE SIMBOLOS COMPLETA */
+/**
+ * Tabela de símbolos
+ * 
+ * Mostra todos os detalhes da tabela de símbolos
+*/
 void mostraTabelaCompleta() {
     int i;
-    printf("Tabela de símbolos");
+    printf("\n\t\t\t\t\t\t Tabela de símbolos\n");
+    for (i = 0; i < 100; i++)
+        printf("-");
     printf("\n%3c | %30s | %s | %s | %s | %s | %s | %s | %s\n",'#', "ID", "ESC", "DSL", "ROT", "CAT", "TIP", "NPA", "PAR");
     for (i = 0; i < 100; i++)
         printf("-");
@@ -156,7 +189,7 @@ void mostraTabelaCompleta() {
             printf(" - ");
         }
     }
-    puts("\n");
+    printf("\n");
 }
 
 
@@ -184,15 +217,11 @@ void mostraTabelaCompleta() {
 //     empilhar(LOG);
 // }
 
-// Estrutura da Pilha Semântica
-// usada para endereços, variáveis, rótulos
-
-
-
-
 #define TAM_PIL 100
-//int pilha[TAM_PIL];
-//sugestao para depurar pilha - tem que mudar em todas as ocorrencias
+
+/**
+ * Estrutura a ser usada para a pilha
+*/
 struct
 {
     int valor;
@@ -200,18 +229,12 @@ struct
 } pilha[TAM_PIL];
 int topo = -1;
 
-// void empilhar (int valor) {
-//     if (topo == TAM_PIL)
-//         yyerror ("Pilha semântica cheia!");
-//     pilha[++topo] = valor;
-// }
-
-// int desempilha() {
-//     if (topo == -1) 
-//         yyerror("Pilha semântica vazia!");
-//     return pilha[topo--];
-// }
-
+/**
+ * Empilha na pilha semântica
+ * 
+ * @param valor Valor a ser empilhado
+ * @param tipo Tipo do valor a ser empilhado
+*/
 void empilhar (int valor, char tipo) {
     if (topo == TAM_PIL)
         yyerror ("Pilha semântica cheia!");
@@ -219,6 +242,11 @@ void empilhar (int valor, char tipo) {
     pilha[topo].tipo = tipo;
 }
 
+/**
+ * Desempilha na pilha semântica
+ * 
+ * @param tipo Tipo do valor a ser desempilhado
+*/
 int desempilha(char tipo) {
     if (topo == -1) 
         yyerror("Pilha semântica vazia!");
@@ -226,11 +254,13 @@ int desempilha(char tipo) {
         char msg[100];
         sprintf(msg, "Desempilha espera [%c] e encontrou[%c]", tipo, pilha[topo].tipo);
         yyerror(msg);    
-
     }
     return pilha[topo--].valor;
 }
 
+/**
+ * Mostra a pilha semântica
+*/
 void mostraPilha(){
     int i = topo;
     printf("Pilha = [");
@@ -239,10 +269,16 @@ void mostraPilha(){
         printf("(%d,%c) ",pilha[i].valor, pilha[i].tipo);
         i--;
     }
-    printf("]\n");
-    
+    printf("]\n");   
 }
 
+/**
+ * Testa o tipo das expressões
+ * 
+ * @param tipo1 Tipo do primeiro valor
+ * @param tipo2 Tipo do segundo valor 
+ * @param ret Tipo de retorno da função
+*/
 void testaTipo(int tipo1, int tipo2, int ret) {
     int t1 = desempilha('t');
     int t2 = desempilha('t');
@@ -251,7 +287,15 @@ void testaTipo(int tipo1, int tipo2, int ret) {
     empilhar(ret, 't');
 }
 
-void ajustaParam(int pos, int nPar){    //parametros: # da função, e n parametros
+/**
+ * Ajusta o endereço dos parâmetros na tabela de símbolos 
+ * 
+ * @param pos Posição do último parâmetro
+ * @param nPar Número de parâmetros da função
+ * 
+ * @note Foi criada antes da posição da função ser capturada para uma variável global no sintatico.y, precisa ser melhorada.
+*/
+void ajustaParam(int pos, int nPar){  
     int endP = -3;
     int posFunc = pos - nPar;
     for (int i = pos; i >= posFunc; i--)
