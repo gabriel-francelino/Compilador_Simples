@@ -252,6 +252,9 @@ comando
 retorno
     :   T_RETORNE expressao
         {
+            int ret = buscaSimbolo(atomo);
+            if(tabSimb[ret].esc == 'G')
+                yyerror("Variável global sendo retornada!");            
             int tip = desempilha('t');          // desempilha o tipo da expresssão
             if (tabSimb[posFunc].tip != tip)    // compara se o tipo é igual da função
                 yyerror("Incompatibilidade de tipo!");
