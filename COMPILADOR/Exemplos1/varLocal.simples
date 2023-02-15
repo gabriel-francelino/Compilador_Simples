@@ -11,5 +11,5 @@ programa teste1
         retorne a
     fimfunc
 inicio
-    escreva i ( 10 20 )
+    escreva i ( 10 20  )
 fimprograma

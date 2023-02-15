@@ -93,7 +93,12 @@ programa
             mostraTabelaCompleta();
             escopo = 'L';
         }   
-        lista_comandos T_FIM
+        lista_comandos 
+        {
+            if(verificaRetorno == 1)
+                yyerror("Retorno inesperado!");
+        }
+        T_FIM
         { 
             int conta = desempilha('n');
             if (conta)
@@ -287,7 +292,7 @@ retorno
             if (contaVarL)
                 fprintf(yyout, "\tDMEM\t%d\n", contaVarL); 
             fprintf(yyout,"\tRTSP\t%d\n", npar); // RTSP n => onde n é numero de parametros
-            verificaRetorno = 1;
+            verificaRetorno = 1; //atribui 1 se tiver retorno
         }
       // {verificar se esta no escopo local
       //  verificar se o tipo da expressao é compativel com o tipo da funcao

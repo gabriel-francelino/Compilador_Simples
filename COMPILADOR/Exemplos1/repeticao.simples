@@ -5,6 +5,10 @@ programa teste
         enquanto i < 10 faca
             escreva i
             i <- i + 1
+            se i = 3 entao 
+                retorne i
+            senao
+            fimse
         fimenquanto
         retorne i
     fimfunc

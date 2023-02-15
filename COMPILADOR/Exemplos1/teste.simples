@@ -9,5 +9,6 @@ programa teste
     fimfunc
 inicio
     i <- f ( 10 V 20 (30 + 2) )
+    //retorne i
     escreva i
 fimprograma
