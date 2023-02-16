@@ -16,7 +16,7 @@ int verificaRetorno = 0;    // verifica se o uso do 'retorne' está correto
 int verTipoPar = 0; // usado para verificar os tipos de parâmetros.
 int qArgs = 0;      // conta número de argumentos
 int chamaFun;
-int npc = 0;
+int vetArg[20];
 %}
 
 %token T_PROGRAMA
@@ -212,7 +212,7 @@ funcao
             removeSimbolosLocais(posFunc, npar+contaVarL);  // remove os símbolos locais da tabela de simbolos
             npar = 0;
             contaVarL = 0;
-            //mostraTabelaCompleta();
+            // mostraTabelaCompleta();
         } 
 
 parametros
@@ -436,8 +436,7 @@ chamada
             // mostraPilha();
             fprintf(yyout,"\tAMEM\t%d\n", 1);
             posFunc = desempilha('p');  
-            npc = 1;
-            //empilhar(posFunc, 'p');
+            empilhar(posFunc, 'p');
         }
         lista_argumentos 
         {
@@ -445,45 +444,47 @@ chamada
         }
         T_FECHA
         {
-            int np;
+            //int np = tabSimb[posFunc].npa;
             //chamaFun = desempilha('p');
+            //int np = tabSimb[posFunc].npa;
+            // mostraPilha();
+            // for(int i=0; i < np; i++){
+            //     //mostraPilha();
+            //     desempilha('a');
+            //     mostraPilha();
+            // }
+            //mostraPilha();
             //mostraPilha();
             posFunc = desempilha('p');
-            printf("npc=%d\n", npc);
-            if(npc == 0)
-                np = tabSimb[posFunc-1].npa;
-            else 
-                np = tabSimb[posFunc].npa;
-            npc = 0;
-            printf("np=%d\n", np);
-
-            for(int i=0; i < np; i++){
-                //mostraPilha();
-                desempilha('a');
-            }
-            //mostraPilha();
-
-            // int np = tabSimb[chamaFun].npa;
+            int np = tabSimb[posFunc].npa;
             // printf("Função: %s, qPar: %d, qArgs: %d\n", tabSimb[chamaFun].id, np, qArgs);
             // if(qArgs != np)
             //     yyerror("Erro na quantidade de parametros.");
-            qArgs = 0;
             //int pos = desempilha('p');
+            int ca=0;
+            for(int i=0; i<np; i++){
+                printf("v=%d, qArgs=%d\n", vetArg[qArgs], qArgs);
+                if(vetArg[qArgs-1] != -9)
+                    yyerror("Erro na quantidade de parâmetros!");
+                qArgs--;
+                //ca++;
+                //printf("v=%d, qArgs=%d\n", vetArg[qArgs], qArgs);
+            }
+            // if(ca != np)
+            //     yyerror("Erro na quantidade parâmetros!");
+            
             fprintf(yyout,"\tSVCP\n");
-            fprintf(yyout,"\tDSVS\tL%d\n", tabSimb[chamaFun].rot);
-            empilhar(tabSimb[chamaFun].tip, 't');
+            fprintf(yyout,"\tDSVS\tL%d\n", tabSimb[posFunc].rot);
+            empilhar(tabSimb[posFunc].tip, 't');
             
         }
     ;
 
 lista_argumentos
     :
-        {
-            empilhar(posFunc, 'p');
-        }
     |   {
-            qArgs++;
-            empilhar(-9, 'a');  //empilha os argumentos
+            
+            //empilhar(-9, 'a');  //empilha os argumentos
             //printf("\nArgumento: %s\n qArgs: %d\n", atomo, qArgs);
         }
         expressao
@@ -493,13 +494,15 @@ lista_argumentos
             if(tabSimb[posFunc].par[verTipoPar] != t)
                 yyerror("Incompatibilidade no tipo dos parametros.");
             verTipoPar++;
+
+            vetArg[qArgs] = -9;
+            qArgs++;
+
             // qArgs++;
             // printf("\nArgumento: %s\n qArgs: %d\n", atomo, qArgs);
         }
+        
         lista_argumentos
-        {
-            
-        }
     ;
 
 termo
