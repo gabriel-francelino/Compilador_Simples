@@ -1,4 +1,14 @@
-// Estrutura da Tabela de Simbolos
+/*+=============================================================
+2 | UNIFAL = Universidade Federal de Alfenas.
+3 | BACHARELADO EM CIENCIA DA COMPUTACAO.
+4 | Trabalho . . : Funcao com retorno
+5 | Disciplina . : Teoria de Linguagens e Compiladores
+6 | Professor. . : Luiz Eduardo da Silva
+7 | Aluno . . . .: Gabriel Francelino Nascimento
+8 | Data . . . . : 16/02/2023
+9 +=============================================================*/
+
+
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>

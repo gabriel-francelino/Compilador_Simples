@@ -1,3 +1,13 @@
+/*+=============================================================
+2 | UNIFAL = Universidade Federal de Alfenas.
+3 | BACHARELADO EM CIENCIA DA COMPUTACAO.
+4 | Trabalho . . : Funcao com retorno
+5 | Disciplina . : Teoria de Linguagens e Compiladores
+6 | Professor. . : Luiz Eduardo da Silva
+7 | Aluno . . . .: Gabriel Francelino Nascimento
+8 | Data . . . . : 16/02/2023
+9 +=============================================================*/
+
 %{
 #include <stdio.h>
 #include <string.h>
@@ -15,7 +25,6 @@ int posFunc;        // captura a posição atual da função
 int verificaRetorno = 0;    // verifica se o uso do 'retorne' está correto
 int verTipoPar = 0; // usado para verificar os tipos de parâmetros.
 int qArgs = 0;      // conta número de argumentos
-int chamaFun;
 int vetArg[20];
 %}
 
@@ -82,7 +91,6 @@ programa
         rotinas 
         T_INICIO
         {
-            // mostraTabelaCompleta();
             escopo = 'L';
         }   
         lista_comandos 
@@ -96,7 +104,6 @@ programa
             if (conta)
                 fprintf(yyout, "\tDMEM\t%d\n", conta); 
             fprintf(yyout, "\tFIMP\n");
-            // mostraPilha();
         }
     ;
 
@@ -199,7 +206,6 @@ funcao
         }
         variaveis 
         {
-            // mostraTabelaCompleta();
             if (contaVarL) 
                 fprintf(yyout,"\tAMEM\t%d\n", contaVarL); 
         } 
@@ -212,7 +218,6 @@ funcao
             removeSimbolosLocais(posFunc, npar+contaVarL);  // remove os símbolos locais da tabela de simbolos
             npar = 0;
             contaVarL = 0;
-            // mostraTabelaCompleta();
         } 
 
 parametros
@@ -253,9 +258,6 @@ comando
 retorno
     :   T_RETORNE expressao
         {
-            // int ret = buscaSimbolo(atomo);
-            // if(tabSimb[ret].esc == 'G')
-            //     yyerror("Variável global sendo retornada!");            
             int tip = desempilha('t');          // desempilha o tipo da expresssão
             if (tabSimb[posFunc].tip != tip)    // compara se o tipo é igual da função
                 yyerror("Incompatibilidade de tipo!");
@@ -411,9 +413,6 @@ expressao
 identificador
     :   T_IDENTIFICADOR
         {
-            // int pos = buscaSimbolo(atomo);  
-            // fprintf(yyout,"\tCRVG\t%d\n", tabSimb[pos].end); 
-            // empilhar(tabSimb[pos].tip);
             int pos = buscaSimbolo(atomo);
             empilhar(pos, 'p');
         }
@@ -433,7 +432,6 @@ chamada
         }
     |   T_ABRE 
         {
-            // mostraPilha();
             fprintf(yyout,"\tAMEM\t%d\n", 1);
             posFunc = desempilha('p');  
             empilhar(posFunc, 'p');
@@ -445,34 +443,15 @@ chamada
         T_FECHA
         {
             //int np = tabSimb[posFunc].npa;
-            //chamaFun = desempilha('p');
-            //int np = tabSimb[posFunc].npa;
-            // mostraPilha();
-            // for(int i=0; i < np; i++){
-            //     //mostraPilha();
-            //     desempilha('a');
-            //     mostraPilha();
-            // }
-            //mostraPilha();
-            //mostraPilha();
             posFunc = desempilha('p');
             int np = tabSimb[posFunc].npa;
             // printf("Função: %s, qPar: %d, qArgs: %d\n", tabSimb[chamaFun].id, np, qArgs);
-            // if(qArgs != np)
-            //     yyerror("Erro na quantidade de parametros.");
-            //int pos = desempilha('p');
-            int ca=0;
             for(int i=0; i<np; i++){
-                printf("v=%d, qArgs=%d\n", vetArg[qArgs], qArgs);
+                //printf("v=%d, qArgs=%d\n", vetArg[qArgs], qArgs);
                 if(vetArg[qArgs-1] != -9)
                     yyerror("Erro na quantidade de parâmetros!");
                 qArgs--;
-                //ca++;
-                //printf("v=%d, qArgs=%d\n", vetArg[qArgs], qArgs);
-            }
-            // if(ca != np)
-            //     yyerror("Erro na quantidade parâmetros!");
-            
+            }            
             fprintf(yyout,"\tSVCP\n");
             fprintf(yyout,"\tDSVS\tL%d\n", tabSimb[posFunc].rot);
             empilhar(tabSimb[posFunc].tip, 't');
@@ -482,11 +461,7 @@ chamada
 
 lista_argumentos
     :
-    |   {
-            
-            //empilhar(-9, 'a');  //empilha os argumentos
-            //printf("\nArgumento: %s\n qArgs: %d\n", atomo, qArgs);
-        }
+    |   
         expressao
         {
             // a partir de cada expressao do argumento desempilha tipo e compara 
@@ -497,8 +472,6 @@ lista_argumentos
 
             vetArg[qArgs] = -9;
             qArgs++;
-
-            // qArgs++;
             // printf("\nArgumento: %s\n qArgs: %d\n", atomo, qArgs);
         }
         
