@@ -39,6 +39,19 @@ void maiuscula (char *s) {
     
 }
 
+int retornoGlobal(char *id, int posFunc){
+    int i, ret = -1;
+    for (i = posFunc; i < posTab; i++){
+        if(strcmp(tabSimb[i].id, id)==0 && tabSimb[i].esc == 'L'){
+            //printf("\n%d\n",i);
+            ret = 0;
+        }
+        
+    }
+    //printf("\n%d\n",ret);
+    return ret;
+}
+
 /**
  * Busca símbolo na tabela de símbolos
  * 

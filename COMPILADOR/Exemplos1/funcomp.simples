@@ -1,10 +1,12 @@
 programa funcomp
     func inteiro f (inteiro a inteiro b)
+    inteiro c
     inicio
         retorne b * 2
     fimfunc
 
     func inteiro g (inteiro a inteiro b)
+    inteiro d
     inicio
         retorne b - 2
     fimfunc
@@ -23,5 +25,5 @@ inicio
     escreva g(g(4 4) 20)
     escreva g(g(20 30) f(8 8))
     escreva f(10 20)
-    escreva h(2 h(10 F))
+    //escreva h(2 h(10 F))
 fimprograma
