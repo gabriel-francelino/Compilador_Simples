@@ -49,6 +49,14 @@ void maiuscula (char *s) {
     
 }
 
+/**
+ * Função para verificar se o retorno da função não contém variável local
+ * 
+ * @param id Atomo a ser verificado
+ * @param posFunc Posição da função na tabela 
+ * 
+ * @deprecated Não está funcionando corretamente
+*/
 int retornoGlobal(char *id, int posFunc){
     int i, ret = -1;
     for (i = posFunc; i < posTab; i++){

@@ -25,7 +25,7 @@ int posFunc;        // captura a posição atual da função
 int verificaRetorno = 0;    // verifica se o uso do 'retorne' está correto
 int verTipoPar = 0; // usado para verificar os tipos de parâmetros.
 int qArgs = 0;      // conta número de argumentos
-int vetArg[20];
+int vetArg[20];     // vetor de argumentos
 %}
 
 %token T_PROGRAMA
@@ -421,6 +421,7 @@ identificador
 chamada
     :   // sem parametros eh uma variavel
         {
+            
             int pos = desempilha('p');
             if(tabSimb[pos].cat == 'F')
                 yyerror("Função sem parâmetros!");
@@ -435,6 +436,8 @@ chamada
             fprintf(yyout,"\tAMEM\t%d\n", 1);
             posFunc = desempilha('p');  
             empilhar(posFunc, 'p');
+            vetArg[qArgs] = posFunc;    // "empilha" os argumentos mas em um vetor
+            qArgs++;                    // quantidade total de argumentos
         }
         lista_argumentos 
         {
@@ -442,20 +445,27 @@ chamada
         }
         T_FECHA
         {
-            //int np = tabSimb[posFunc].npa;
             posFunc = desempilha('p');
             int np = tabSimb[posFunc].npa;
-            // printf("Função: %s, qPar: %d, qArgs: %d\n", tabSimb[chamaFun].id, np, qArgs);
-            for(int i=0; i<np; i++){
-                //printf("v=%d, qArgs=%d\n", vetArg[qArgs], qArgs);
-                if(vetArg[qArgs-1] != -9)
-                    yyerror("Erro na quantidade de parâmetros!");
+            int contaArg =0;
+            // printf("qArgs=%d, np=%d\n", qArgs, np);
+            // printf("vet[qArgs]=%d\n", vetArg[qArgs-1]);
+            // puts("");
+            // for(int i=0; i<qArgs; i++){      //mostra o conteúdo do vetor de argumentos
+            //     printf(" [%d] ",vetArg[i]);
+            // }
+            // puts("");
+            while(vetArg[qArgs-1] == -9){
+                contaArg++;
                 qArgs--;
-            }            
+                //printf("contaArg=%d, qArgs=%d, np=%d\n", contaArg, qArgs, np);
+            }    
+            if(contaArg != np)
+                yyerror("Erro na quantidade de parâmetros!!");
+            qArgs--;    // decrementa posição da função no vetor     
             fprintf(yyout,"\tSVCP\n");
             fprintf(yyout,"\tDSVS\tL%d\n", tabSimb[posFunc].rot);
             empilhar(tabSimb[posFunc].tip, 't');
-            
         }
     ;
 
