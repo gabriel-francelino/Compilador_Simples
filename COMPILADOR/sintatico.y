@@ -16,6 +16,7 @@ int verificaRetorno = 0;    // verifica se o uso do 'retorne' está correto
 int verTipoPar = 0; // usado para verificar os tipos de parâmetros.
 int qArgs = 0;      // conta número de argumentos
 int chamaFun;
+int npc = 0;
 %}
 
 %token T_PROGRAMA
@@ -211,7 +212,7 @@ funcao
             removeSimbolosLocais(posFunc, npar+contaVarL);  // remove os símbolos locais da tabela de simbolos
             npar = 0;
             contaVarL = 0;
-            // mostraTabelaCompleta();
+            //mostraTabelaCompleta();
         } 
 
 parametros
@@ -435,7 +436,8 @@ chamada
             // mostraPilha();
             fprintf(yyout,"\tAMEM\t%d\n", 1);
             posFunc = desempilha('p');  
-            empilhar(posFunc, 'p');
+            npc = 1;
+            //empilhar(posFunc, 'p');
         }
         lista_argumentos 
         {
@@ -443,16 +445,24 @@ chamada
         }
         T_FECHA
         {
-            //int np = tabSimb[posFunc].npa;
+            int np;
             //chamaFun = desempilha('p');
-            int np = tabSimb[posFunc].npa;
+            //mostraPilha();
+            posFunc = desempilha('p');
+            printf("npc=%d\n", npc);
+            if(npc == 0)
+                np = tabSimb[posFunc-1].npa;
+            else 
+                np = tabSimb[posFunc].npa;
+            npc = 0;
+            printf("np=%d\n", np);
 
             for(int i=0; i < np; i++){
                 //mostraPilha();
                 desempilha('a');
             }
             //mostraPilha();
-            chamaFun = desempilha('p');
+
             // int np = tabSimb[chamaFun].npa;
             // printf("Função: %s, qPar: %d, qArgs: %d\n", tabSimb[chamaFun].id, np, qArgs);
             // if(qArgs != np)
@@ -468,6 +478,9 @@ chamada
 
 lista_argumentos
     :
+        {
+            empilhar(posFunc, 'p');
+        }
     |   {
             qArgs++;
             empilhar(-9, 'a');  //empilha os argumentos
@@ -484,6 +497,9 @@ lista_argumentos
             // printf("\nArgumento: %s\n qArgs: %d\n", atomo, qArgs);
         }
         lista_argumentos
+        {
+            
+        }
     ;
 
 termo
